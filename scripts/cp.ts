@@ -3,6 +3,8 @@ const devDependencies = [
   'ts-jest',
   'jest',
   'tslint',
+  '@types/jest',
+  'rimraf',
 ]
 
 const packageName = process.argv[2]
