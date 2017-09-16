@@ -9,19 +9,20 @@ export function stringifyPoint (point: Point): string {
 }
 
 export function stringifyNode (node: Node): string {
-  let position = node.position
+  const position = node.position
   if (position == null) {
-    position = {
-      start: {
-        line: 1,
-        column: 1,
-      },
-      end: {
-        line: 1,
-        column: 1,
-      },
-    }
+    return stringifyPoint({
+      line: 1,
+      column: 1,
+    })
   }
 
   return stringifyPosition(position)
+}
+
+export function stringify (input: Point | Position | Node): string {
+  if ((input as Node).type != null) return stringifyNode((input as Node))
+  if ((input as Position).start != null) return stringifyPosition((input as Position))
+  if ((input as Point).line != null) return stringifyPoint((input as Point))
+  throw new Error(`Invalid argument: the argument must be Point, Position or Node. But got ${input}`)
 }
