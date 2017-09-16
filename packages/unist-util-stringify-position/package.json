@@ -1,10 +1,10 @@
 {
   "name": "typed-unist-util-stringify-position",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
-  "main": "build/lib/index.js",
+  "main": "build-node/lib/index.js",
   "module": "build/lib/index.js",
-  "types": "build/lib/index.d.ts",
+  "types": "typings/lib/index.d.ts",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
     "build:es": "tsc -p . -d --declarationDir typings",
