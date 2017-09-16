@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "allowJs": false,
+    "jsx": "preserve",
+    "baseUrl": "src",
+    "rootDir": "src",
+    "outDir": "build",
+    "moduleResolution": "node",
+    "inlineSourceMap": true,
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "specs"
+  ]
+}
