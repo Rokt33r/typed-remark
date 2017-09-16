@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "allowJs": true,
+    "jsx": "preserve",
+    "baseUrl": "./src",
+    "outDir": "build",
+    "moduleResolution": "node",
+    "inlineSourceMap": true,
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "node_modules",
+    "packages"
+  ]
+}

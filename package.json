@@ -1,0 +1,21 @@
+{
+  "name": "typed-remark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cp": "ts-node scripts/cp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/shelljs": "^0.7.4",
+    "lerna": "^2.1.2",
+    "shelljs": "^0.7.8",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  }
+}
