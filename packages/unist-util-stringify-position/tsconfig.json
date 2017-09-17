@@ -6,7 +6,6 @@
     "jsx": "preserve",
     "baseUrl": "src",
     "rootDir": "src",
-    "outDir": "build",
     "moduleResolution": "node",
     "inlineSourceMap": true,
     "noImplicitAny": true
