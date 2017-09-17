@@ -1,6 +1,6 @@
 {
   "name": "typed-unist-util-stringify-position",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "node/lib/index.js",
   "module": "es/lib/index.js",
