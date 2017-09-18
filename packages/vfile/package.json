@@ -1,0 +1,41 @@
+{
+  "name": "typed-vfile",
+  "version": "0.1.0",
+  "description": "",
+  "main": "node/lib/index.js",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && npm run build:es && npm run build:node",
+    "build:es": "tsc -p . -d --declarationDir typings --outDir es",
+    "build:node": "tsc -p . -m commonjs --outDir node",
+    "build:watch": "tsc -p . -w",
+    "test": "jest -c jest.json src/specs",
+    "test:watch": "jest -c jest.json --watch src/specs",
+    "test:quick": "jest -c jest.json src/specs",
+    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
+    "clean": "rimraf es node typings",
+    "prepublishOnly": "npm run lint && npm run build && npm run test"
+  },
+  "keywords": [],
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^20.0.8",
+    "@types/node": "^8.0.28",
+    "@types/replace-ext": "0.0.27",
+    "jest": "^21.1.0",
+    "ts-jest": "^21.0.0",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "replace-ext": "^1.0.0",
+    "typed-unist-util-stringify-position": "^0.2.2"
+  },
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ]
+}
