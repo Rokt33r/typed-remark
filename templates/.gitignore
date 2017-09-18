@@ -1,5 +1,5 @@
 /node_modules
-/build
-/node-build
+/es
+/node
 /typings
 *.log

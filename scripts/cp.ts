@@ -7,6 +7,12 @@ const devDependencies = [
   'rimraf',
 ]
 
+const templates = [
+  '.gitignore',
+  'jest.json',
+  'tsconfig.json',
+]
+
 const packageName = process.argv[2]
 
 // If packageName isn't given, throw an error.
@@ -21,8 +27,9 @@ const rootDir = path.join(__dirname, '../')
 const packageDir = path.join(rootDir, 'packages', packageName)
 
 shelljs.mkdir(packageDir, path.join(packageDir, 'src'))
-shelljs.cp(path.join(rootDir, 'templates', 'tsconfig.json'), packageDir)
-shelljs.cp(path.join(rootDir, 'templates', '.gitignore'), packageDir)
+templates.forEach(template => {
+  shelljs.cp(path.join(rootDir, 'templates', template), packageDir)
+})
 shelljs.cd(packageDir)
 // Generate package.json
 shelljs.exec('npm init -y')
