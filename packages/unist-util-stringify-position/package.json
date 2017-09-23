@@ -11,7 +11,7 @@
     "build:node": "tsc -p . -m commonjs --outDir node",
     "build:watch": "tsc -p . -w",
     "test": "jest -c jest.json src/specs",
-    "test:watch": "jest -c jest.json -w src/specs",
+    "test:watch": "jest -c jest.json --watch src/specs",
     "test:quick": "jest -c jest.json src/specs",
     "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
     "clean": "rimraf es node typings",
