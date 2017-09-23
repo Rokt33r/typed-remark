@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "lerna run test",
+    "pretest": "npm run lint",
+    "lint": "lerna run lint",
     "cp": "ts-node scripts/cp"
   },
   "keywords": [],
