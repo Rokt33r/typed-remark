@@ -10,9 +10,9 @@
     "build:es": "tsc -p . -d --declarationDir typings --outDir es",
     "build:node": "tsc -p . -m commonjs --outDir node",
     "build:watch": "tsc -p . -w",
-    "test": "jest -c jest.json src/specs",
+    "test": "jest -c jest.json",
     "test:watch": "jest -c jest.json --watch src/specs",
-    "test:quick": "jest -c jest.json src/specs",
+    "test:quick": "jest -c jest.json es",
     "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
     "clean": "rimraf es node typings",
     "prepublishOnly": "npm run lint && npm run build && npm run test"
@@ -24,8 +24,10 @@
     "@types/jest": "^20.0.8",
     "@types/node": "^8.0.28",
     "@types/replace-ext": "0.0.27",
+    "babel-jest": "^21.0.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "jest": "^21.1.0",
-    "ts-jest": "^21.0.0",
+    "source-map-support": "^0.4.18",
     "typescript": "^2.5.2"
   },
   "dependencies": {
