@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "test": "lerna run test",
     "pretest": "npm run lint",
     "lint": "lerna run lint",
