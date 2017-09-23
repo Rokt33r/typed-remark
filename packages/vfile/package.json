@@ -1,6 +1,6 @@
 {
   "name": "typed-vfile",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "node/lib/index.js",
   "module": "es/lib/index.js",
