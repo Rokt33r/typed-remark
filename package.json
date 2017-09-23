@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "build": "lerna run build",
     "test": "lerna run test",
     "pretest": "npm run lint",
     "lint": "lerna run lint",
