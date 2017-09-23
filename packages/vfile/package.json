@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "replace-ext": "^1.0.0",
+    "typed-unist": "^0.1.0",
     "typed-unist-util-stringify-position": "^0.2.2"
   },
   "files": [
