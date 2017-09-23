@@ -1,10 +1,12 @@
 const devDependencies = [
   'typescript',
-  'ts-jest',
   'jest',
   'tslint',
   '@types/jest',
   'rimraf',
+  'babel-jest',
+  'babel-plugin-transform-es2015-modules-commonjs',
+  'source-map-support',
 ]
 
 const templates = [
@@ -23,10 +25,10 @@ const scripts = {
   'build': 'npm run clean && npm run build:es && npm run build:node',
   'build:es': 'tsc -p . -d --declarationDir typings --outDir es',
   'build:node': 'tsc -p . -m commonjs --outDir node',
-  'build:watch': 'tsc -p . -w',
-  'test': 'jest -c jest.json src/specs',
-  'test:watch': 'jest -c jest.json --watch src/specs',
-  'test:quick': 'jest -c jest.json src/specs',
+  'build:watch': 'tsc -p . -w --outDir es',
+  'test': 'jest -c jest.json',
+  'test:watch': 'jest -c jest.json --watch es/*',
+  'test:quick': 'jest -c jest.json es/*',
   'lint': 'tslint -c ../../tslint.json -p ./tsconfig.json',
   'clean': 'rimraf es node typings',
   'prepublishOnly': 'npm run lint && npm run build && npm run test',
