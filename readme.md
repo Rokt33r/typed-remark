@@ -4,8 +4,10 @@ A fork of Remark markdown processor, written in Typescript!
 
 ## Packages
 
-- VFile
-- Unified
+- unist
+- unist-util-stringify-position
+- vfile
+- unified
 
 ## Why?
 
