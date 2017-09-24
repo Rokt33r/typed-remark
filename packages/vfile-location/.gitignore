@@ -1,0 +1,5 @@
+/node_modules
+/es
+/node
+/typings
+*.log
