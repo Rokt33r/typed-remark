@@ -1,8 +1,10 @@
 {
   "name": "typed-unified",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
-  "main": "index.js",
+  "main": "node/lib/index.js",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
     "build:es": "tsc -p . -d --declarationDir typings --outDir es",
