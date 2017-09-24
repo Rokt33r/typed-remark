@@ -57,6 +57,8 @@ import * as fs from 'fs'
 const rootDir = path.join(__dirname, '../')
 const packageDir = path.join(rootDir, 'packages', packageName)
 shelljs.mkdir(packageDir, path.join(packageDir, 'src'))
+shelljs.mkdir(packageDir, path.join(packageDir, 'src/lib'))
+shelljs.mkdir(packageDir, path.join(packageDir, 'src/specs'))
 
 // Copy template files
 templates.forEach(template => {
