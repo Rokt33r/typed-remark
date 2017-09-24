@@ -18,13 +18,13 @@ describe('VFileLocation', () => {
     })
 
     it('returns a point(Regression Test)', () => {
-      const qnaTuples: [number, Point][] = [
+      const qnas: [number, Point][] = [
         [5, {line: 2, column: 2, offset: 5}],
         [0, {line: 1, column: 1, offset: 0}],
         [11, {line: 3, column: 4, offset: 11}],
       ]
 
-      qnaTuples.forEach(([position, offset]) => {
+      qnas.forEach(([position, offset]) => {
         const result = location.toPosition(position)
 
         expect(result).toEqual(offset)
@@ -43,13 +43,13 @@ describe('VFileLocation', () => {
     })
 
     it('returns an offset(Regression Test)', () => {
-      const qnaTuples: [Point, number][] = [
+      const qnas: [Point, number][] = [
         [{line: 2, column: 2}, 5],
         [{line: 1, column: 1}, 0],
         [{line: 3, column: 4}, 11],
       ]
 
-      qnaTuples.forEach(([position, offset]) => {
+      qnas.forEach(([position, offset]) => {
         const result = location.toOffset(position)
 
         expect(result).toEqual(offset)
