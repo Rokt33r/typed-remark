@@ -26,12 +26,12 @@ const scripts = {
   'build:es': 'tsc -p . -d --declarationDir typings --outDir es',
   'build:node': 'tsc -p . -m commonjs --outDir node',
   'build:watch': 'tsc -p . -w --outDir es',
-  'test': 'jest -c jest.json',
-  'test:watch': 'jest -c jest.json --watch es/*',
-  'test:quick': 'jest -c jest.json es/*',
-  'lint': 'tslint -c ../../tslint.json -p ./tsconfig.json',
   'clean': 'rimraf es node typings',
+  'lint': 'tslint -c ../../tslint.json -p ./tsconfig.json',
   'prepublishOnly': 'npm run lint && npm run build && npm run test',
+  'test': 'jest -c jest.json',
+  'test:quick': 'jest -c jest.json es/*',
+  'test:watch': 'jest -c jest.json --watch es/*',
 }
 
 const files = [
