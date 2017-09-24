@@ -1,6 +1,6 @@
 {
   "name": "typed-unified",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -36,5 +36,11 @@
     "lodash.isfunction": "^3.0.8",
     "typed-unist": "^0.1.0",
     "typed-vfile": "^0.1.0"
-  }
+  },
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ]
 }
