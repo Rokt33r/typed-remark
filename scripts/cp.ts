@@ -73,8 +73,10 @@ const parsedJSON = JSON.parse(packageJSON)
 Object.assign(parsedJSON, paths, {
   files,
   scripts,
+  version: '0.1.0',
+  name: `typed-${packageName}`,
 })
-fs.writeFileSync(packageJSONPath, JSON.stringify(parsedJSON))
+fs.writeFileSync(packageJSONPath, JSON.stringify(parsedJSON, null, 2))
 
 // Install devDependencies
 shelljs.exec('npm i -D ' + devDependencies.join(' '))
