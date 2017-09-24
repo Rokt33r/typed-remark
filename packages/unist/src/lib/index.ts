@@ -1,7 +1,5 @@
 /**
- * Position references a range consisting of two points in a Unist file. Position consists of a start and end point. And, if relevant, an indent property.
- *
- * When the value represented by a node is not present in the document corresponding to the syntax tree at the time of reading, it must not have positional information. These nodes are said to be generated.
+ * Point references a point consisting of two indices in a Unist file: line and column, set to 1-based integers. An offset (0-based) may be used.
  *
  * - line >= 1
  * - column >= 1
@@ -17,7 +15,9 @@ export interface Point {
 }
 
 /**
- * Point references a point consisting of two indices in a Unist file: line and column, set to 1-based integers. An offset (0-based) may be used.
+ * Position references a range consisting of two points in a Unist file. Position consists of a start and end point. And, if relevant, an indent property.
+ *
+ * When the value represented by a node is not present in the document corresponding to the syntax tree at the time of reading, it must not have positional information. These nodes are said to be generated.
  *
  * - indent >= 1
  *
