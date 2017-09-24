@@ -13,6 +13,7 @@ const templates = [
   '.gitignore',
   'jest.json',
   'tsconfig.json',
+  '.babelrc',
 ]
 
 const paths = {
