@@ -2,6 +2,15 @@
   "name": "typed-vfile",
   "version": "0.1.1",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ],
   "main": "node/lib/index.js",
   "module": "es/lib/index.js",
   "types": "typings/lib/index.d.ts",
@@ -10,16 +19,18 @@
     "build:es": "tsc -p . -d --declarationDir typings --outDir es",
     "build:node": "tsc -p . -m commonjs --outDir node",
     "build:watch": "tsc -p . -w --outDir es",
-    "test": "jest -c jest.json",
-    "test:watch": "jest -c jest.json --watch es/*",
-    "test:quick": "jest -c jest.json es/*",
-    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
     "clean": "rimraf es node typings",
-    "prepublishOnly": "npm run lint && npm run build && npm run test"
+    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
+    "test": "jest -c jest.json",
+    "test:quick": "jest -c jest.json es/*",
+    "test:watch": "jest -c jest.json --watch es/*"
   },
-  "keywords": [],
-  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
-  "license": "ISC",
+  "dependencies": {
+    "replace-ext": "^1.0.0",
+    "typed-unist": "^0.1.0",
+    "typed-unist-util-stringify-position": "^0.2.2"
+  },
   "devDependencies": {
     "@types/jest": "^20.0.8",
     "@types/node": "^8.0.28",
@@ -29,16 +40,5 @@
     "jest": "^21.1.0",
     "source-map-support": "^0.4.18",
     "typescript": "^2.5.2"
-  },
-  "dependencies": {
-    "replace-ext": "^1.0.0",
-    "typed-unist": "^0.1.0",
-    "typed-unist-util-stringify-position": "^0.2.2"
-  },
-  "files": [
-    "src/lib/*",
-    "es/lib/*",
-    "node/lib/*",
-    "typings/lib/*"
-  ]
+  }
 }

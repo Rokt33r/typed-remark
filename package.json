@@ -2,22 +2,24 @@
   "name": "typed-remark",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "lerna bootstrap && npm run build",
     "build": "lerna run build",
-    "test": "lerna run test",
-    "pretest": "npm run lint",
+    "cp": "ts-node scripts/cp",
+    "postinstall": "lerna bootstrap && npm run build",
     "lint": "lerna run lint",
-    "cp": "ts-node scripts/cp"
+    "sort-package-json": "lerna exec sort-package-json",
+    "pretest": "npm run lint",
+    "test": "lerna run test"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/shelljs": "^0.7.4",
     "lerna": "^2.1.2",
     "shelljs": "^0.7.8",
+    "sort-package-json": "^1.7.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
     "typescript": "^2.5.2"

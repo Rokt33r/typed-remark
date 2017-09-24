@@ -2,27 +2,27 @@
   "name": "typed-unist",
   "version": "0.1.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "files": [
+    "build/lib/*",
+    "src/lib/*"
+  ],
   "main": "build/lib/index.js",
   "module": "build/lib/index.js",
   "types": "build/lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf build",
     "build": "npm run clean && tsc -p . -d",
     "build:watch": "tsc -p . -w -d",
+    "clean": "rimraf build",
     "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
     "prepublishOnly": "npm run lint && npm run build",
     "test": "echo \"You don't have to test typed-unist. It only has type definitions.\""
   },
-  "keywords": [],
-  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
-  "license": "ISC",
   "devDependencies": {
     "rimraf": "^2.6.2",
     "tslint": "^5.7.0",
     "typescript": "^2.5.2"
-  },
-  "files": [
-    "build/lib/*",
-    "src/lib/*"
-  ]
+  }
 }
