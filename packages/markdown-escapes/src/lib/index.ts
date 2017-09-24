@@ -37,7 +37,7 @@ export const commonmark = gfm.concat([
   '^',
 ])
 
-interface Options {
+export interface Options {
   gfm?: boolean
   commonmark?: boolean
 }
