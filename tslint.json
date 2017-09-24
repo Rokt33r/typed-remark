@@ -29,6 +29,7 @@
           "typeLiterals": "never"
         }
       }
-    ]
+    ],
+    "no-bitwise": false
   }
 }
