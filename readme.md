@@ -21,5 +21,5 @@ Use at caution. This package's truck factor is **ONE**.
 
 As long as, I can afford, I'm going to keep following updates of original remark package.
 
-[remark](https://github.com/wooorm/remark)
-[wooorm](https://github.com/wooorm)
+[remark]:(https://github.com/wooorm/remark)
+[wooorm]:(https://github.com/wooorm)
