@@ -4,21 +4,21 @@ import {
 } from 'lodash'
 
 /* Assert a parser is available. */
-export function assertParser(name: string, Parser: any) {
+export function assertParser (name: string, Parser: any) {
   if (!isFunction(Parser)) {
     throw new Error('Cannot `' + name + '` without `Parser`')
   }
 }
 
 /* Assert a compiler is available. */
-export function assertCompiler(name: string, Compiler: any) {
+export function assertCompiler (name: string, Compiler: any) {
   if (!isFunction(Compiler)) {
     throw new Error('Cannot `' + name + '` without `Compiler`')
   }
 }
 
 /* Assert the processor is not frozen. */
-export function assertUnfrozen(name: string, frozen: boolean) {
+export function assertUnfrozen (name: string, frozen: boolean) {
   if (frozen) {
     throw new Error(
       'Cannot invoke `' + name + '` on a frozen processor.\n' +
@@ -29,7 +29,7 @@ export function assertUnfrozen(name: string, frozen: boolean) {
 }
 
 /* Assert that `complete` is `true`. */
-export function throwAsyncTransformError(name: string, asyncName: string): never {
+export function throwAsyncTransformError (name: string, asyncName: string): never {
   throw new Error('`' + name + '` finished async. Use `' + asyncName + '` instead')
 }
 

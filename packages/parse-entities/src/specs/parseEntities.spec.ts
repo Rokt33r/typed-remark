@@ -20,16 +20,14 @@ describe('parseEntities', () => {
       ['foo &amp; bar', {
         result: 'foo & bar',
         reference: [
-          ['&', location(1, 5, 4, 1, 10, 9), '&amp;'],
+          ['&', createPosition(1, 5, 4, 1, 10, 9), '&amp;'],
         ],
         text: [
-          ['foo ', location(1, 1, 0, 1, 5, 4)],
-          [' bar', location(1, 10, 9, 1, 14, 13)],
+          ['foo ', createPosition(1, 1, 0, 1, 5, 4)],
+          [' bar', createPosition(1, 10, 9, 1, 14, 13)],
         ],
         warning: [],
       }],
-
-
     ]
   })
 
@@ -42,7 +40,7 @@ interface Result {
   result: string
 }
 
-function assert(fixture: string, options: Options<any>) {
+function assert (fixture: string, options: Options<any>) {
   const settings = options || {}
   const result: Result = {
     text: [],
@@ -546,15 +544,15 @@ function assert(fixture: string, options: Options<any>) {
 // });
 
 /* Utility to create a `location`. */
-function location(aLine: number, aColumn: number, aOffset: number, bLine: number, bColumn: number, bOffset: number): Position {
+function createPosition (aLine: number, aColumn: number, aOffset: number, bLine: number, bColumn: number, bOffset: number): Position {
   return {
-    start: position(aLine, aColumn, aOffset),
-    end: position(bLine, bColumn, bOffset),
+    start: createPoint(aLine, aColumn, aOffset),
+    end: createPoint(bLine, bColumn, bOffset),
   }
 }
 
 /* Utility to create a `position`. */
-function position(line: number, column: number, offset: number): Point {
+function createPoint (line: number, column: number, offset: number): Point {
   return {
     line,
     column,

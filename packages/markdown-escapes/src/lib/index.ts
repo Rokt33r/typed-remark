@@ -43,7 +43,7 @@ export interface Options {
 }
 
 /* Get markdown escapes. */
-export function getEscapes(options: Options = {}) {
+export function getEscapes (options: Options = {}) {
   if (options.commonmark) {
     return commonmark
   }

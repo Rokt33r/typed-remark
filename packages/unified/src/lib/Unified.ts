@@ -87,7 +87,7 @@ export class Processor {
   public Compiler: Compiler
 
   // We should avoid using overloading
-  public use <O>(plugin: Attacher<O>, options?: O): this {
+  public use<O> (plugin: Attacher<O>, options?: O): this {
     assertUnfrozen('use', this.frozen)
 
     this.attachers.push([plugin, options])

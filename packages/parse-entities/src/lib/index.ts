@@ -84,7 +84,7 @@ const MESSAGES = {
 }
 
 /* Wrap to ensure clean parameters are given to `parse`. */
-export function parseEntities<C>(value: string, options?: Options<C>) {
+export function parseEntities<C> (value: string, options?: Options<C>) {
   options = {
     ...defaults,
     ...options,
@@ -101,7 +101,7 @@ export function parseEntities<C>(value: string, options?: Options<C>) {
 }
 
 /* Parse entities. */
-function parse<C>(value: string, settings: Settings<C>) {
+function parse<C> (value: string, settings: Settings<C>) {
   const additional = settings.additional
   const nonTerminated = settings.nonTerminated
   const handleText = settings.text
@@ -390,7 +390,7 @@ function parse<C>(value: string, settings: Settings<C>) {
   return result.join('')
 
   /* Get current position. */
-  function now(): Point {
+  function now (): Point {
     return {
       line,
       column,

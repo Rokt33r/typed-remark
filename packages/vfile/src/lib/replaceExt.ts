@@ -1,7 +1,7 @@
 // From https://github.com/gulpjs/replace-ext
 import * as path from 'path'
 
-export function replaceExt(npath: string, ext: string) {
+export function replaceExt (npath: string, ext: string) {
   if (typeof npath !== 'string') {
     return npath
   }
