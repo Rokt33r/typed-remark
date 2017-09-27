@@ -1,10 +1,13 @@
 {
   "name": "typed-parse-entities",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "contributors": [
+    "Jiseung Roh <jiseung.roh@gmail.com> (https://github.com/rohjs/)"
+  ],
   "files": [
     "src/lib/*",
     "es/lib/*",
