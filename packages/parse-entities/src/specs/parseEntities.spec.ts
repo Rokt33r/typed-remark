@@ -37,13 +37,13 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo { bar',
       reference: [
-        ['{', location(1, 5, 4, 1, 11, 10), '&#123;']
+        ['{', location(1, 5, 4, 1, 11, 10), '&#123;'],
       ],
       text: [
         ['foo ', location(1, 1, 0, 1, 5, 4)],
-        [' bar', location(1, 11, 10, 1, 15, 14)]
+        [' bar', location(1, 11, 10, 1, 15, 14)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -53,13 +53,13 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo ģ bar',
       reference: [
-        ['ģ', location(1, 5, 4, 1, 12, 11), '&#x123;']
+        ['ģ', location(1, 5, 4, 1, 12, 11), '&#x123;'],
       ],
       text: [
         ['foo ', location(1, 1, 0, 1, 5, 4)],
-        [' bar', location(1, 12, 11, 1, 16, 15)]
+        [' bar', location(1, 12, 11, 1, 16, 15)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -69,15 +69,14 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: '& bar',
       reference: [
-        ['&', location(1, 1, 0, 1, 6, 5), '&amp;']
+        ['&', location(1, 1, 0, 1, 6, 5), '&amp;'],
       ],
       text: [
-        [' bar', location(1, 6, 5, 1, 10, 9)]
+        [' bar', location(1, 6, 5, 1, 10, 9)],
       ],
-      warning: []
+      warning: [],
     })
   })
-
 
   it('should work when the entity is final', () => {
     const result = assert('foo &amp;')
@@ -85,12 +84,12 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo &',
       reference: [
-        ['&', location(1, 5, 4, 1, 10, 9), '&amp;']
+        ['&', location(1, 5, 4, 1, 10, 9), '&amp;'],
       ],
       text: [
-        ['foo ', location(1, 1, 0, 1, 5, 4)]
+        ['foo ', location(1, 1, 0, 1, 5, 4)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -102,30 +101,30 @@ describe('parseEntities', () => {
       reference: [
         ['&', location(1, 1, 0, 1, 6, 5), '&amp;'],
         ['{', location(1, 6, 5, 1, 12, 11), '&#123;'],
-        ['ģ', location(1, 12, 11, 1, 19, 18), '&#x123;']
+        ['ģ', location(1, 12, 11, 1, 19, 18), '&#x123;'],
       ],
       text: [],
-      warning: []
+      warning: [],
     })
   })
 
   it('should work when named but warn without terminal semicolon', () => {
     const result = assert('foo &amp bar')
-    
+
     expect(result).toEqual({
       result: 'foo & bar',
       reference: [
-        ['&', location(1, 5, 4, 1, 9, 8), '&amp']
+        ['&', location(1, 5, 4, 1, 9, 8), '&amp'],
       ],
       text: [
         ['foo ', location(1, 1, 0, 1, 5, 4)],
-        [' bar', location(1, 9, 8, 1, 13, 12)]
+        [' bar', location(1, 9, 8, 1, 13, 12)],
       ],
       warning: [[
         'Named character references must be terminated by a semicolon',
         point(1, 9, 8),
-        1
-      ]]
+        1,
+      ]],
     })
   })
 
@@ -136,9 +135,9 @@ describe('parseEntities', () => {
       result: 'foo &amp bar',
       reference: [],
       text: [
-        ['foo &amp bar', location(1, 1, 0, 1, 13, 12)]
+        ['foo &amp bar', location(1, 1, 0, 1, 13, 12)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -148,17 +147,17 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo { bar',
       reference: [
-        ['{', location(1, 5, 4, 1, 10, 9), '&#123']
+        ['{', location(1, 5, 4, 1, 10, 9), '&#123'],
       ],
       text: [
         ['foo ', location(1, 1, 0, 1, 5, 4)],
-        [' bar', location(1, 10, 9, 1, 14, 13)]
+        [' bar', location(1, 10, 9, 1, 14, 13)],
       ],
       warning: [[
         'Numeric character references must be terminated by a semicolon',
         point(1, 10, 9),
-        2
-      ]]
+        2,
+      ]],
     })
   })
 
@@ -169,9 +168,9 @@ describe('parseEntities', () => {
       result: 'Foo &\tbar',
       reference: [],
       text: [
-          ['Foo &\tbar', location(1, 1, 0, 1, 10, 9)]
+          ['Foo &\tbar', location(1, 1, 0, 1, 10, 9)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -182,9 +181,9 @@ describe('parseEntities', () => {
       result: 'Foo &\nbar',
       reference: [],
       text: [
-        ['Foo &\nbar', location(1, 1, 0, 2, 4, 9)]
+        ['Foo &\nbar', location(1, 1, 0, 2, 4, 9)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -195,9 +194,9 @@ describe('parseEntities', () => {
       result: 'Foo &\fbar',
       reference: [],
       text: [
-        ['Foo &\fbar', location(1, 1, 0, 1, 10, 9)]
+        ['Foo &\fbar', location(1, 1, 0, 1, 10, 9)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -208,9 +207,9 @@ describe('parseEntities', () => {
       result: 'Foo & bar',
       reference: [],
       text: [
-        ['Foo & bar', location(1, 1, 0, 1, 10, 9)]
+        ['Foo & bar', location(1, 1, 0, 1, 10, 9)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -221,9 +220,9 @@ describe('parseEntities', () => {
       result: 'Foo &<bar',
       reference: [],
       text: [
-        ['Foo &<bar', location(1, 1, 0, 1, 10, 9)]
+        ['Foo &<bar', location(1, 1, 0, 1, 10, 9)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -234,15 +233,15 @@ describe('parseEntities', () => {
       result: 'Foo &&bar',
       reference: [],
       text: [
-        ['Foo &&bar', location(1, 1, 0, 1, 10, 9)]
+        ['Foo &&bar', location(1, 1, 0, 1, 10, 9)],
       ],
       /* The warning here is for the following ampersand,
        * followed by `bar`, which is not an entity. */
       warning: [[
         'Named character references cannot be empty',
         point(1, 7, 6),
-        3
-      ]]
+        3,
+      ]],
     })
   })
 
@@ -253,9 +252,9 @@ describe('parseEntities', () => {
       result: 'Foo &',
       reference: [],
       text: [
-        ['Foo &', location(1, 1, 0, 1, 6, 5)]
+        ['Foo &', location(1, 1, 0, 1, 6, 5)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -266,9 +265,9 @@ describe('parseEntities', () => {
       result: 'Foo &"',
       reference: [],
       text: [
-        ['Foo &"', location(1, 1, 0, 1, 7, 6)]
+        ['Foo &"', location(1, 1, 0, 1, 7, 6)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -279,9 +278,9 @@ describe('parseEntities', () => {
       result: 'foo&ampbar',
       reference: [],
       text: [
-        ['foo&ampbar', location(1, 1, 0, 1, 11, 10)]
+        ['foo&ampbar', location(1, 1, 0, 1, 11, 10)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -291,13 +290,13 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo&bar',
       reference: [
-        ['&', location(1, 4, 3, 1, 9, 8), '&amp;']
+        ['&', location(1, 4, 3, 1, 9, 8), '&amp;'],
       ],
       text: [
         ['foo', location(1, 1, 0, 1, 4, 3)],
-        ['bar', location(1, 9, 8, 1, 12, 11)]
+        ['bar', location(1, 9, 8, 1, 12, 11)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -307,12 +306,12 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo&',
       reference: [
-        ['&', location(1, 4, 3, 1, 9, 8), '&amp;']
+        ['&', location(1, 4, 3, 1, 9, 8), '&amp;'],
       ],
       text: [
-        ['foo', location(1, 1, 0, 1, 4, 3)]
+        ['foo', location(1, 1, 0, 1, 4, 3)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -323,13 +322,13 @@ describe('parseEntities', () => {
       result: 'foo&amp=',
       reference: [],
       text: [
-        ['foo&amp=', location(1, 1, 0, 1, 9, 8)]
+        ['foo&amp=', location(1, 1, 0, 1, 9, 8)],
       ],
       warning: [[
         'Named character references must be terminated by a semicolon',
         point(1, 8, 7),
-        1
-      ]]
+        1,
+      ]],
     })
   })
 
@@ -339,16 +338,16 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'foo&',
       reference: [
-        ['&', location(1, 4, 3, 1, 8, 7), '&amp']
+        ['&', location(1, 4, 3, 1, 8, 7), '&amp'],
       ],
       text: [
-        ['foo', location(1, 1, 0, 1, 4, 3)]
+        ['foo', location(1, 1, 0, 1, 4, 3)],
       ],
       warning: [[
         'Named character references must be terminated by a semicolon',
         point(1, 8, 7),
-        1
-      ]]
+        1,
+      ]],
     })
   })
 
@@ -359,9 +358,9 @@ describe('parseEntities', () => {
       result: 'foo&amplol',
       reference: [],
       text: [
-        ['foo&amplol', location(1, 1, 0, 1, 11, 10)]
+        ['foo&amplol', location(1, 1, 0, 1, 11, 10)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -372,13 +371,13 @@ describe('parseEntities', () => {
       result: 'Foo &#',
       reference: [],
       text: [
-        ['Foo &#', location(1, 1, 0, 1, 7, 6)]
+        ['Foo &#', location(1, 1, 0, 1, 7, 6)],
       ],
       warning: [[
         'Numeric character references cannot be empty',
         point(1, 7, 6),
-        4
-      ]]
+        4,
+      ]],
     })
   })
 
@@ -389,9 +388,9 @@ describe('parseEntities', () => {
       result: 'Foo &=',
       reference: [],
       text: [
-        ['Foo &=', location(1, 1, 0, 1, 7, 6)]
+        ['Foo &=', location(1, 1, 0, 1, 7, 6)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -402,13 +401,13 @@ describe('parseEntities', () => {
       result: 'Foo &bar; baz',
       reference: [],
       text: [
-        ['Foo &bar; baz', location(1, 1, 0, 1, 14, 13)]
+        ['Foo &bar; baz', location(1, 1, 0, 1, 14, 13)],
       ],
       warning: [[
         'Named character references must be known',
         point(1, 6, 5),
-        5
-      ]]
+        5,
+      ]],
     })
   })
 
@@ -418,18 +417,18 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'Foo \uFFFD baz',
       reference: [
-        ['\uFFFD', location(1, 5, 4, 1, 13, 12), '&#xD800;']
+        ['\uFFFD', location(1, 5, 4, 1, 13, 12), '&#xD800;'],
       ],
       text: [
         ['Foo ', location(1, 1, 0, 1, 5, 4)],
-        [' baz', location(1, 13, 12, 1, 17, 16)]
+        [' baz', location(1, 13, 12, 1, 17, 16)],
       ],
       warning: [[
         'Numeric character references cannot be outside the permissible ' +
         'Unicode range',
         point(1, 13, 12),
-        7
-      ]]
+        7,
+      ]],
     })
   })
 
@@ -439,17 +438,17 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'Foo € baz',
       reference: [
-        ['€', location(1, 5, 4, 1, 11, 10), '&#128;']
+        ['€', location(1, 5, 4, 1, 11, 10), '&#128;'],
       ],
       text: [
         ['Foo ', location(1, 1, 0, 1, 5, 4)],
-        [' baz', location(1, 11, 10, 1, 15, 14)]
+        [' baz', location(1, 11, 10, 1, 15, 14)],
       ],
       warning: [[
         'Numeric character references cannot be disallowed',
         point(1, 11, 10),
-        6
-      ]]
+        6,
+      ]],
     })
   })
 
@@ -459,17 +458,17 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'Foo \uFDEE baz',
       reference: [
-        ['\uFDEE', location(1, 5, 4, 1, 13, 12), '&#xfdee;']
+        ['\uFDEE', location(1, 5, 4, 1, 13, 12), '&#xfdee;'],
       ],
       text: [
         ['Foo ', location(1, 1, 0, 1, 5, 4)],
-        [' baz', location(1, 13, 12, 1, 17, 16)]
+        [' baz', location(1, 13, 12, 1, 17, 16)],
       ],
       warning: [[
         'Numeric character references cannot be disallowed',
         point(1, 13, 12),
-        6
-      ]]
+        6,
+      ]],
     })
   })
 
@@ -479,53 +478,53 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'Foo 👍 baz',
       reference: [
-        ['👍', location(1, 5, 4, 1, 14, 13), '&#x1F44D;']
+        ['👍', location(1, 5, 4, 1, 14, 13), '&#x1F44D;'],
       ],
       text: [
         ['Foo ', location(1, 1, 0, 1, 5, 4)],
-        [' baz', location(1, 14, 13, 1, 18, 17)]
+        [' baz', location(1, 14, 13, 1, 18, 17)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
   it('when given positional information', () => {
     const result = assert('foo&amp;bar\n&not;baz', {
-      position: point(3, 5, 12)
+      position: point(3, 5, 12),
     })
 
     expect(result).toEqual({
       result: 'foo&bar\n¬baz',
       reference: [
         ['&', location(3, 8, 15, 3, 13, 20), '&amp;'],
-        ['¬', location(4, 1, 24, 4, 6, 29), '&not;']
+        ['¬', location(4, 1, 24, 4, 6, 29), '&not;'],
       ],
       text: [
         ['foo', location(3, 5, 12, 3, 8, 15)],
         ['bar\n', location(3, 13, 20, 4, 1, 24)],
-        ['baz', location(4, 6, 29, 4, 9, 32)]
+        ['baz', location(4, 6, 29, 4, 9, 32)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
   it('when given location information', () => {
     const result = assert('foo&amp;bar\n&not;baz', {
-      position: location(3, 5, 12, 4, 9, 32)
+      position: location(3, 5, 12, 4, 9, 32),
     })
 
     expect(result).toEqual({
       result: 'foo&bar\n¬baz',
       reference: [
         ['&', location(3, 8, 15, 3, 13, 20), '&amp;'],
-        ['¬', location(4, 1, 24, 4, 6, 29), '&not;']
+        ['¬', location(4, 1, 24, 4, 6, 29), '&not;'],
       ],
       text: [
         ['foo', location(3, 5, 12, 3, 8, 15)],
         ['bar\n', location(3, 13, 20, 4, 1, 24)],
-        ['baz', location(4, 6, 29, 4, 9, 32)]
+        ['baz', location(4, 6, 29, 4, 9, 32)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -534,22 +533,22 @@ describe('parseEntities', () => {
       position: {
         start: point(3, 5, 12),
         end: point(4, 9, 32),
-        indent: [5]
-      }
+        indent: [5],
+      },
     })
 
     expect(result).toEqual({
       result: 'foo&bar\n¬baz',
       reference: [
         ['&', location(3, 8, 15, 3, 13, 20), '&amp;'],
-        ['¬', location(4, 5, 24, 4, 10, 29), '&not;']
+        ['¬', location(4, 5, 24, 4, 10, 29), '&not;'],
       ],
       text: [
         ['foo', location(3, 5, 12, 3, 8, 15)],
         ['bar\n', location(3, 13, 20, 4, 5, 24)],
-        ['baz', location(4, 10, 29, 4, 13, 32)]
+        ['baz', location(4, 10, 29, 4, 13, 32)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -559,17 +558,17 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'I’m ¬it; though',
       reference: [
-        ['¬', location(1, 5, 4, 1, 9, 8), '&not']
+        ['¬', location(1, 5, 4, 1, 9, 8), '&not'],
       ],
       text: [
         ['I’m ', location(1, 1, 0, 1, 5, 4)],
-        ['it; though', location(1, 9, 8, 1, 19, 18)]
+        ['it; though', location(1, 9, 8, 1, 19, 18)],
       ],
       warning: [[
         'Named character references must be terminated by a semicolon',
         point(1, 9, 8),
-        1
-      ]]
+        1,
+      ]],
     })
   })
 
@@ -579,13 +578,13 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'I’m ∉ though',
       reference: [
-        ['∉', location(1, 5, 4, 1, 12, 11), '&notin;']
+        ['∉', location(1, 5, 4, 1, 12, 11), '&notin;'],
       ],
       text: [
         ['I’m ', location(1, 1, 0, 1, 5, 4)],
-        [' though', location(1, 12, 11, 1, 19, 18)]
+        [' though', location(1, 12, 11, 1, 19, 18)],
       ],
-      warning: []
+      warning: [],
     })
   })
 
@@ -595,17 +594,17 @@ describe('parseEntities', () => {
     expect(result).toEqual({
       result: 'I’m &ed though',
       reference: [
-        ['&', location(1, 5, 4, 1, 9, 8), '&AMP']
+        ['&', location(1, 5, 4, 1, 9, 8), '&AMP'],
       ],
       text: [
         ['I’m ', location(1, 1, 0, 1, 5, 4)],
-        ['ed though', location(1, 9, 8, 1, 18, 17)]
+        ['ed though', location(1, 9, 8, 1, 18, 17)],
       ],
       warning: [[
         'Named character references must be terminated by a semicolon',
         point(1, 9, 8),
-        1
-      ]]
+        1,
+      ]],
     })
   })
 
@@ -616,43 +615,16 @@ describe('parseEntities', () => {
       result: 'I’m &circled though',
       reference: [],
       text: [
-        ['I’m &circled though', location(1, 1, 0, 1, 20, 19)]
+        ['I’m &circled though', location(1, 1, 0, 1, 20, 19)],
       ],
       warning: [[
         'Named character references cannot be empty',
         point(1, 6, 5),
-        3
-      ]]
+        3,
+      ]],
     })
   })
-  
-  // t.end();
-
-  // function assert(fixture, options) {
-  //   var settings = options || {};
-  //   var result = {
-  //     text: [],
-  //     reference: [],
-  //     warning: []
-  //   };
-
-  //   /* Construct an `add`er for `type`. */
-  //   function addFactory(type) {
-  //     return function () {
-  //       result[type].push([].slice.apply(arguments));
-  //     };
-  //   }
-
-  //   settings.text = addFactory('text');
-  //   settings.reference = addFactory('reference');
-  //   settings.warning = addFactory('warning');
-
-  //   result.result = decode(fixture, settings);
-
-  //   return result;
-  // }
 })
-
 
 interface Result {
   text: [string, Position][]
@@ -684,10 +656,6 @@ function assert (fixture: string, options?: Options<any>) {
 
   return result
 }
-
-
-
-
 
 /* Utility to create a `location`. */
 function location (aLine: number, aColumn: number, aOffset: number, bLine: number, bColumn: number, bOffset: number): Position {
