@@ -131,14 +131,14 @@ export class VFile {
     return error
   }
 
-  public info (reason: string | Error, position?: Position, ruleId?: string): VFileMessage {
+  public info (reason: string | Error, position?: Point | Position | Node, ruleId?: string): VFileMessage {
     const error = this.message(reason, position, ruleId)
     error.fatal = null
 
     return error
   }
 
-  public fail (reason: string | Error, position?: Position, ruleId?: string) {
+  public fail (reason: string | Error, position?: Point | Position | Node, ruleId?: string) {
     const error = this.message(reason, position, ruleId)
     error.fatal = true
 
