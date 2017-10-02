@@ -8,6 +8,7 @@
     "rootDir": "src",
     "moduleResolution": "node",
     "inlineSourceMap": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "noUnusedLocals": true
   }
 }

@@ -1,10 +1,7 @@
 import { isWhitespaceCharacter } from '../utils/isWhitespaceCharacter'
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
-import {
-  Text,
-  Point,
-} from 'typed-unist'
+import { Text } from 'typed-unist'
 import { locateInlineCode } from '../locate/codeInline'
 
 const C_TICK = '`'

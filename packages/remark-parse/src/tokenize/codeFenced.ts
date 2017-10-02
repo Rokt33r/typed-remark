@@ -1,4 +1,4 @@
-import { TokenizeMethod, Eat, Apply } from '../tokenizer'
+import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node } from 'typed-unist'
 import { trimTrailingLines } from '../utils/trimTrailingLines'

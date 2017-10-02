@@ -9,7 +9,7 @@ const C_SPACE = ' '
 const C_GT = '>'
 
 /* Tokenise a blockquote. */
-const blockquote = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean) {
+export const blockquote: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean) {
   const self: RemarkParser = this
   const offsets = self.offset
   const tokenizers = self.blockTokenizers
