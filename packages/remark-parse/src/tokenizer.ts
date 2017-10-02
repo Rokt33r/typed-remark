@@ -29,8 +29,8 @@ export interface Apply {
   test: Test
 }
 
-interface Reset {
-  (node: Node, parent: Parent): Node
+export interface Reset {
+  (node: Node, parent?: Parent): Node
   test: Test
 }
 
