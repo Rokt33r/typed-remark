@@ -11,7 +11,7 @@ const CODE_INDENT_COUNT = 4
 const CODE_INDENT = C_SPACE.repeat(CODE_INDENT_COUNT)
 
 /* Tokenise indented code. */
-export const indentedCode: TokenizeMethod = function (eat: Eat, value: string, silent?: boolean): Node | boolean {
+export const indentedCode: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean): Node | boolean {
   let index = -1
   const length = value.length
   let subvalue = ''

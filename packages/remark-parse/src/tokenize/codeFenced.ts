@@ -12,7 +12,7 @@ const C_TICK = '`'
 const MIN_FENCE_COUNT = 3
 const CODE_INDENT_COUNT = 4
 
-export const fencedCode: TokenizeMethod = function (eat: Eat, value: string, silent?: boolean): Node | boolean {
+export const fencedCode: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean): Node | boolean {
   const self = this
   const settings = self.options
   const length = value.length + 1
@@ -128,7 +128,7 @@ export const fencedCode: TokenizeMethod = function (eat: Eat, value: string, sil
   now.offset += subvalue.length
 
   subvalue += flag
-  flag = self.decode.raw(self.unescape(flag), now)
+  flag = self.decodeRaw(self.unescape(flag), now)
 
   if (queue) {
     subvalue += queue

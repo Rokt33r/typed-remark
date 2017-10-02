@@ -6,7 +6,7 @@ import { locateBreak } from '../locate/break'
 
 const MIN_BREAK_LENGTH = 2
 
-export const hardBreak = function (eat: Eat, value: string, silent?: boolean) {
+export const hardBreak = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean) {
   const length = value.length
   let index = -1
   let queue = ''

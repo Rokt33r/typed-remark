@@ -34,7 +34,7 @@ interface Reset {
   test: Test
 }
 
-type Test = () => void
+type Test = () => Position
 
 export interface Factory {
   (type: 'inline' | 'block'): Tokenize
@@ -171,7 +171,7 @@ export function factory (type: 'inline' | 'block') {
       /* Test the position, after eating, and reverse
        * to a not-eaten state. */
       function test () {
-        // FIXME: Put
+        // FIXME: Don't use as Node
         const result = pos({} as Node)
 
         line = current.line

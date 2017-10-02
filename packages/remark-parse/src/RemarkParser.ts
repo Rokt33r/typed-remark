@@ -8,7 +8,7 @@ import { parse } from './parse'
 import VFileLocation from 'typed-vfile-location'
 import { getEscapes } from 'typed-markdown-escapes'
 import { unescape } from './unescape'
-import { decoder } from './decode'
+import { decoder, decodeRaw } from './decode'
 import { defaultOptions } from './defaultOptions'
 import { autoLink } from './tokenize/autoLink'
 import { hardBreak } from './tokenize/break'
@@ -43,6 +43,7 @@ export class RemarkParser {
   public toOffset: (potision: Point) => number
   public unescape: (value: string) => string
   public decode: (value: string, position: Point, handler: () => void) => void
+  public decodeRaw: (value: string, position: Point) => string
   public interruptParagraph: InteruptRule[]
   public interruptList: InteruptRule[]
   public interruptBlockquote: InteruptRule[]
@@ -75,6 +76,7 @@ export class RemarkParser {
 RemarkParser.prototype.parse = parse
 RemarkParser.prototype.unescape = unescape
 RemarkParser.prototype.decode = decoder
+RemarkParser.prototype.decodeRaw = decodeRaw
 RemarkParser.prototype.options = defaultOptions
 
 /* Nodes that can interupt a paragraph:

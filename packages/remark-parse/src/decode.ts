@@ -5,6 +5,7 @@ import {
 } from 'typed-unist'
 import { parseEntities } from 'typed-parse-entities'
 
+/* Decode `value` (at `position`) into text-nodes. */
 export function decoder (this: RemarkParser, value: string, point: Point, handler: () => void) {
   parseEntities(value, {
     position: normalize(this.offset, point),
@@ -13,6 +14,14 @@ export function decoder (this: RemarkParser, value: string, point: Point, handle
     reference: handler,
     textContext: this,
     referenceContext: this,
+  })
+}
+
+/* Decode `value` (at `position`) into a string. */
+export function decodeRaw (this: RemarkParser, value: string, point: Point) {
+  return parseEntities(value, {
+    position: normalize(this.offset, point),
+    warning: handleWarning.bind(this),
   })
 }
 
