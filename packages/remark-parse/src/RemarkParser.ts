@@ -42,7 +42,7 @@ export class RemarkParser {
   }
   public toOffset: (potision: Point) => number
   public unescape: (value: string) => string
-  public decode: (value: string, position: Point, handler: () => void) => void
+  public decode: (value: string, position: Point, handler: (value: string, location: Position) => void) => void
   public decodeRaw: (value: string, position: Point) => string
   public interruptParagraph: InteruptRule[]
   public interruptList: InteruptRule[]

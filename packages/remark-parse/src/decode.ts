@@ -6,7 +6,7 @@ import {
 import { parseEntities } from 'typed-parse-entities'
 
 /* Decode `value` (at `position`) into text-nodes. */
-export function decoder (this: RemarkParser, value: string, point: Point, handler: () => void) {
+export function decoder (this: RemarkParser, value: string, point: Point, handler: (value: string, location: Position) => void) {
   parseEntities(value, {
     position: normalize(this.offset, point),
     warning: handleWarning.bind(this),
