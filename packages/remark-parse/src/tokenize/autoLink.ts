@@ -16,7 +16,7 @@ const MAILTO = 'mailto:'
 const MAILTO_LENGTH = MAILTO.length
 
 /* Tokenise a link. */
-export const autoLink = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean) {
+export const autoLink: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean) {
   if (value.charAt(0) !== C_LT) {
     return
   }
