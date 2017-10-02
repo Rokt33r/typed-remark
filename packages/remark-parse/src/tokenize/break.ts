@@ -15,6 +15,7 @@ export const hardBreak: TokenizeMethod = function (this: RemarkParser, eat: Eat,
 
     if (character === '\n') {
       if (index < MIN_BREAK_LENGTH) {
+        // FIXME: it returns void
         return
       }
 
@@ -29,6 +30,7 @@ export const hardBreak: TokenizeMethod = function (this: RemarkParser, eat: Eat,
     }
 
     if (character !== ' ') {
+      // FIXME: it returns void
       return
     }
 
