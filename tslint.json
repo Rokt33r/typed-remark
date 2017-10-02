@@ -30,6 +30,7 @@
         }
       }
     ],
-    "no-bitwise": false
+    "no-bitwise": false,
+    "only-arrow-functions": false
   }
 }
