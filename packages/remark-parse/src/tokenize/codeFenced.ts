@@ -1,8 +1,6 @@
-import { interrupt } from '../utils/interrupt'
 import { TokenizeMethod, Eat, Apply } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node } from 'typed-unist'
-import { locateBreak } from '../locate/break'
 import { trimTrailingLines } from '../utils/trimTrailingLines'
 
 const C_NEWLINE = '\n'
@@ -14,7 +12,7 @@ const C_TICK = '`'
 const MIN_FENCE_COUNT = 3
 const CODE_INDENT_COUNT = 4
 
-export const fencedCode = function (eat: Eat, value: string, silent?: boolean) {
+export const fencedCode: TokenizeMethod = function (eat: Eat, value: string, silent?: boolean): Node | boolean {
   const self = this
   const settings = self.options
   const length = value.length + 1
@@ -234,4 +232,4 @@ export const fencedCode = function (eat: Eat, value: string, silent?: boolean) {
     lang: flag || null,
     value: trimTrailingLines(exdentedContent),
   } as Node)
-}
+} as TokenizeMethod

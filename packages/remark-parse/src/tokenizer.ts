@@ -9,7 +9,7 @@ import { RemarkParser } from './RemarkParser'
 import { VFile } from 'typed-vfile'
 
 export interface TokenizeMethod {
-  (eat: Eat): Node
+  (eat: Eat): Node | boolean
   onlyAtStart?: boolean
   notInList?: boolean
   notInBlock?: boolean
