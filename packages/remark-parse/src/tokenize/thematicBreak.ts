@@ -11,7 +11,7 @@ const C_DASH = '-'
 
 const THEMATIC_BREAK_MARKER_COUNT = 3
 
-export const text: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean): Node | boolean | void {
+export const thematicBreak: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean): Node | boolean | void {
   let index = -1
   const length = value.length + 1
   let subvalue = ''
