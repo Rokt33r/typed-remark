@@ -91,7 +91,8 @@ export class RemarkParser {
     this.inLink = false
     this.atStart = true
 
-    this.toOffset = new VFileLocation(file).toOffset
+    const vFileLocation = new VFileLocation(file)
+    this.toOffset = vFileLocation.toOffset.bind(vFileLocation)
   }
 
   public parse: (this: RemarkParser) => Node
