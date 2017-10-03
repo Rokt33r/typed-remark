@@ -2,6 +2,7 @@ import { Doc } from 'typed-unified'
 import {
   Node,
   Point,
+  Position,
 } from 'typed-unist'
 import { VFile } from 'typed-vfile'
 import { parse } from './parse'
@@ -10,9 +11,32 @@ import { getEscapes } from 'typed-markdown-escapes'
 import { unescape } from './unescape'
 import { decoder, decodeRaw } from './decode'
 import { defaultOptions } from './defaultOptions'
-import { autoLink } from './tokenize/autoLink'
-import { hardBreak } from './tokenize/break'
 import { TokenizeMethod, Factory, Tokenize, factory as tokenizer } from './tokenizer'
+import { autoLink } from './tokenize/autoLink'
+import { blockquote } from './tokenize/blockquote'
+import { strikethrough } from './tokenize/delete'
+import { hardBreak } from './tokenize/break'
+import { fencedCode } from './tokenize/codeFenced'
+import { indentedCode } from './tokenize/codeIndented'
+import { inlineCode } from './tokenize/codeInline'
+import { definition } from './tokenize/definition'
+import { emphasis } from './tokenize/emphasis'
+import { escape } from './tokenize/escape'
+import { footnoteDefinition } from './tokenize/footnoteDefinition'
+import { atxHeading } from './tokenize/headingATX'
+import { setextHeading } from './tokenize/headingSetext'
+import { blockHTML } from './tokenize/htmlBlock'
+import { inlineHTML } from './tokenize/htmlInline'
+import { link } from './tokenize/link'
+import { list } from './tokenize/list'
+import { newline } from './tokenize/newline'
+import { paragraph } from './tokenize/paragraph'
+import { reference } from './tokenize/reference'
+import { strong } from './tokenize/strong'
+import { table } from './tokenize/table'
+import { text } from './tokenize/text'
+import { thematicBreak } from './tokenize/thematicBreak'
+import { url } from './tokenize/url'
 
 export interface RemarkParserOptions {
   position?: boolean,
@@ -137,34 +161,34 @@ RemarkParser.prototype.interruptBlockquote = [
 ]
 
 RemarkParser.prototype.blockTokenizers = {
-  newline: require('./tokenize/newline'),
-  indentedCode: require('./tokenize/code-indented'),
-  fencedCode: require('./tokenize/code-fenced'),
-  blockquote: require('./tokenize/blockquote'),
-  atxHeading: require('./tokenize/heading-atx'),
-  thematicBreak: require('./tokenize/thematic-break'),
-  list: require('./tokenize/list'),
-  setextHeading: require('./tokenize/heading-setext'),
-  html: require('./tokenize/html-block'),
-  footnote: require('./tokenize/footnote-definition'),
-  definition: require('./tokenize/definition'),
-  table: require('./tokenize/table'),
-  paragraph: require('./tokenize/paragraph'),
+  newline,
+  indentedCode,
+  fencedCode,
+  blockquote,
+  atxHeading,
+  thematicBreak,
+  list,
+  setextHeading,
+  html: blockHTML,
+  footnote: footnoteDefinition,
+  definition,
+  table,
+  paragraph,
 }
 
 RemarkParser.prototype.inlineTokenizers = {
-  escape: require('./tokenize/escape'),
+  escape,
   autoLink,
-  url: require('./tokenize/url'),
-  html: require('./tokenize/html-inline'),
-  link: require('./tokenize/link'),
-  reference: require('./tokenize/reference'),
-  strong: require('./tokenize/strong'),
-  emphasis: require('./tokenize/emphasis'),
-  deletion: require('./tokenize/delete'),
-  code: require('./tokenize/code-inline'),
+  url,
+  html: inlineHTML,
+  link,
+  reference,
+  strong,
+  emphasis,
+  deletion: strikethrough,
+  code: inlineCode,
   break: hardBreak,
-  text: require('./tokenize/text'),
+  text,
 }
 
 /* Expose precedence. */
