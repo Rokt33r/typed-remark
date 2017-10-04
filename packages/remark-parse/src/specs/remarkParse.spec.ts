@@ -1,6 +1,3 @@
-import * as path from 'path'
-import * as fs from 'fs'
-import { VFile } from 'typed-vfile'
 import unified from 'typed-unified'
 import remarkParse from '../lib'
 import { Parent } from 'typed-unist'

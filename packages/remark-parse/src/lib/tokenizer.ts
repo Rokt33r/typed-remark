@@ -34,7 +34,7 @@ export interface Reset {
   test: Test
 }
 
-type Test = () => Position
+export type Test = () => Position
 
 export interface Factory {
   (type: 'inline' | 'block'): Tokenize
