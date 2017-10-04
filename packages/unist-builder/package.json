@@ -1,0 +1,40 @@
+{
+  "name": "typed-unist-builder",
+  "version": "0.1.0",
+  "description": "",
+  "main": "node/lib/index.js",
+  "scripts": {
+    "build": "npm run clean && npm run build:es && npm run build:node",
+    "build:es": "tsc -p . -d --declarationDir typings --outDir es",
+    "build:node": "tsc -p . -m commonjs --outDir node",
+    "build:watch": "tsc -p . -w --outDir es",
+    "clean": "rimraf es node typings",
+    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
+    "test": "jest -c jest.json",
+    "test:quick": "jest -c jest.json es/*",
+    "test:watch": "jest -c jest.json --watch es/*"
+  },
+  "keywords": [],
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "license": "ISC",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^21.1.2",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "jest": "^21.2.1",
+    "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.0",
+    "tslint": "^5.7.0",
+    "typed-unist": "^0.1.0",
+    "typescript": "^2.5.3"
+  }
+}
