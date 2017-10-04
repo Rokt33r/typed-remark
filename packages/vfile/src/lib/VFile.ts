@@ -14,19 +14,7 @@ import {
   assertPart,
   assertPathExists,
 } from './assert'
-
-export interface VFileMessage {
-  name: string
-  file: string
-  reason: string
-  ruleId?: string
-  source?: string
-  stack?: string
-  fatal?: boolean
-  line?: number
-  column?: number
-  location?: Position
-}
+import { VMessage } from './VFileMessage'
 
 export interface VFileOptions {
   contents: Buffer | string | null
@@ -37,7 +25,7 @@ export interface VFileOptions {
   extname: string
   dirname: string
   history: string[]
-  messages: VFileMessage[]
+  messages: VMessage[]
   data: any
 }
 
@@ -50,7 +38,7 @@ export class VFile {
   public extname: string
   public dirname: string
   public history: string[]
-  public messages: VFileMessage[]
+  public messages: VMessage[]
   public data: any
 
   constructor (input?: Partial<VFileOptions> | string | Buffer) {
@@ -90,7 +78,7 @@ export class VFile {
       : String(value)
   }
 
-  public message (reason: string | Error, position?: Point | Position | Node, ruleId?: string): VFileMessage {
+  public message (reason: string | Error, position?: Point | Position | Node, ruleId?: string): VMessage {
     const filePath = this.path
     const range = stringify(position)
     let location: Position = {
@@ -111,7 +99,7 @@ export class VFile {
       }
     }
 
-    const error: VFileMessage = {
+    const error = new VMessage({
       name: (filePath ? filePath + ':' : '') + range,
       file: filePath,
       reason: (reason as Error).message || (reason as string),
@@ -120,7 +108,7 @@ export class VFile {
       column:  location.start.column,
       ruleId,
       fatal: false,
-    }
+    })
 
     if ((reason as Error).stack) {
       error.stack = (reason as Error).stack
@@ -131,7 +119,7 @@ export class VFile {
     return error
   }
 
-  public info (reason: string | Error, position?: Point | Position | Node, ruleId?: string): VFileMessage {
+  public info (reason: string | Error, position?: Point | Position | Node, ruleId?: string): VMessage {
     const error = this.message(reason, position, ruleId)
     error.fatal = null
 

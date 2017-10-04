@@ -103,7 +103,8 @@ describe('VFile', () => {
       expect(message.column).toBe(2)
       expect(message.ruleId).toBe('random_id')
       expect(message.fatal).toBe(false)
-      expect(message.stack).toBeUndefined()
+      expect(message.stack).toBe('')
+      expect(String(message)).toBe('test/test.md:1:2: random_reason')
     })
 
     it('creates a VFileMessage with an error', () => {
