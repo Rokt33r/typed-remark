@@ -31,7 +31,7 @@
     "lodash": "^4.17.4",
     "lodash.isfunction": "^3.0.8",
     "typed-unist": "^0.1.0",
-    "typed-vfile": "^0.1.0"
+    "typed-vfile": "^0.2.1"
   },
   "devDependencies": {
     "@types/extend": "^2.0.30",
