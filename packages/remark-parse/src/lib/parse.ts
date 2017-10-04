@@ -4,6 +4,7 @@ import {
   Node,
   Point,
 } from 'typed-unist'
+import { removePosition } from 'typed-unist-util-remove-position'
 
 const C_NEWLINE = '\n'
 const EXPRESSION_LINE_BREAKS = /\r\n|\r/g
@@ -37,10 +38,9 @@ export function parse (this: RemarkParser): Node {
     },
   }
 
-  // FIXME: Add unist-util-remove-position later
-  // if (!this.options.position) {
-  //   removePosition(node, true)
-  // }
+  if (!this.options.position) {
+    removePosition(node, true)
+  }
 
   return node
 }
