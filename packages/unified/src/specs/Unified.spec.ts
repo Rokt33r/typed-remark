@@ -36,6 +36,17 @@ describe('Processor', () => {
 
       expect(processor.frozen).toBe(true)
     })
+
+    it('calls attacher with options', () => {
+      const options = { random: 'options' }
+      const attacher = jest.fn()
+      const processor = new Processor()
+        .use(attacher, options)
+
+      processor.freeze()
+
+      expect(attacher).toBeCalledWith(options)
+    })
   })
 
   describe('parse', () => {

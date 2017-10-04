@@ -101,7 +101,7 @@ export class Processor {
     }
 
     this.attachers.forEach(([attacher, options]) => {
-      const transformer = attacher.apply(this, options)
+      const transformer = attacher.call(this, options)
       // Trnasformer is optional
       if (transformer) {
         this.transformers.push(transformer)
