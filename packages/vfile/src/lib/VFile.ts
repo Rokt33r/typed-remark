@@ -80,7 +80,7 @@ export class VFile {
 
   public message (reason: string | Error, position?: Point | Position | Node, ruleId?: string): VMessage {
     const filePath = this.path
-    const range = stringify(position)
+    const range = stringify(position || { line: 1, column: 1 })
     let location: Position = {
       start: {line: null, column: null},
       end: {line: null, column: null},

@@ -74,7 +74,7 @@ describe('VFile', () => {
   })
 
   describe('message', () => {
-    it('creates a VFileMessage with a string', () => {
+    it('creates a VMessage with a string', () => {
       const vfile = new VFile({
         contents: 'tango',
         path: 'test/test.md',
@@ -107,7 +107,7 @@ describe('VFile', () => {
       expect(String(message)).toBe('test/test.md:1:2: random_reason')
     })
 
-    it('creates a VFileMessage with an error', () => {
+    it('creates a VMessage with an error', () => {
       const vfile = new VFile({
         contents: 'tango',
         path: 'test/test.md',
@@ -125,7 +125,20 @@ describe('VFile', () => {
       expect(message.stack).toBe(error.stack)
     })
 
-    it('creates a VFileMessage with a position', () => {
+    it('create a VMessage without a position', () => {
+      const vfile = new VFile({
+        contents: 'tango',
+        path: 'test/test.md',
+      })
+
+      const message = vfile.message('random_reason')
+
+      expect(message.reason).toBe('random_reason')
+      expect(message.name).toBe('test/test.md:1:1')
+      expect(String(message)).toBe('test/test.md:1:1: random_reason')
+    })
+
+    it('creates a VMessage with a position', () => {
       const vfile = new VFile({
         contents: 'tango',
         path: 'test/test.md',
@@ -158,7 +171,7 @@ describe('VFile', () => {
       expect(message.column).toBe(2)
     })
 
-    it('creates a VFileMessage with a node', () => {
+    it('creates a VMessage with a node', () => {
       const vfile = new VFile({
         contents: 'tango',
         path: 'test/test.md',
