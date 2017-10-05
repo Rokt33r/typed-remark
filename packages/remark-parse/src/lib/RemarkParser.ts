@@ -53,36 +53,40 @@ export interface InteruptRuleOptions {
 }
 export type InteruptRule = [string] | [string, InteruptRuleOptions]
 
-export abstract class RemarkParser {
-  public options: RemarkParserOptions
-  public escape: string[]
-  public file: VFile
-  public inList: boolean
-  public inBlock: boolean
-  public inLink: boolean
-  public atStart: boolean
-  public offset: {
-    [key: number]: number
-  }
-  public toOffset: (potision: Point) => number
-  public unescape: (value: string) => string
-  public decode: (value: string, position: Point, handler: (value: string, location: Position, source: string) => void) => void
-  public decodeRaw: (value: string, position: Point) => string
-  public interruptParagraph: InteruptRule[]
-  public interruptList: InteruptRule[]
-  public interruptBlockquote: InteruptRule[]
-  public eof: Point
-  public inlineMethods: string[]
-  public blockMethods: string[]
-  public blockTokenizers: {[key: string]: TokenizeMethod}
-  public inlineTokenizers: {[key: string]: TokenizeMethod}
-  public tokenizeBlock: Tokenize
-  public tokenizeInline: Tokenize
-  public tokenizeFactory: Factory
-  public parse: (this: RemarkParser) => Node
+export interface RemarkParserConstructor {
+  new (doc: Doc, file: VFile): RemarkParser
 }
 
-export const parserFactory = () => {
+export interface RemarkParser {
+  options: RemarkParserOptions
+  escape: string[]
+  file: VFile
+  inList: boolean
+  inBlock: boolean
+  inLink: boolean
+  atStart: boolean
+  offset: {
+    [key: number]: number
+  }
+  toOffset: (potision: Point) => number
+  unescape: (value: string) => string
+  decode: (value: string, position: Point, handler: (value: string, location: Position, source: string) => void) => void
+  decodeRaw: (value: string, position: Point) => string
+  interruptParagraph: InteruptRule[]
+  interruptList: InteruptRule[]
+  interruptBlockquote: InteruptRule[]
+  eof: Point
+  inlineMethods: string[]
+  blockMethods: string[]
+  blockTokenizers: {[key: string]: TokenizeMethod}
+  inlineTokenizers: {[key: string]: TokenizeMethod}
+  tokenizeBlock: Tokenize
+  tokenizeInline: Tokenize
+  tokenizeFactory: Factory
+  parse: (this: RemarkParser) => Node
+}
+
+export const parserFactory = (): RemarkParserConstructor => {
   class Parser implements RemarkParser {
     public options: RemarkParserOptions
     public escape: string[]
