@@ -1,6 +1,6 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
-import { Node, Point } from 'typed-unist'
+import { Node, Point, Position } from 'typed-unist'
 
 export const text: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean): Node | boolean {
   const self = this
@@ -49,10 +49,13 @@ export const text: TokenizeMethod = function (this: RemarkParser, eat: Eat, valu
   subvalue = value.slice(0, min)
   now = eat.now()
 
-  // FIXME: source is never used by parseEntiites
-  // self.decode(subvalue, now, function (content: string, position: Point, source: string) {
-  self.decode(subvalue, now, function (content: string) {
-    eat(content)({
+  /**
+   * When decoding happens, source argument is available.
+   * Content: Decoded result of the partial of the subvalue
+   * Source: Original value of the partial
+   */
+  self.decode(subvalue, now, function (content: string, p: Position, source?: string) {
+    eat(source || content)({
       type: 'text',
       value: content,
     } as Node)

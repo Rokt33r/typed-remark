@@ -53,7 +53,7 @@ export interface InteruptRuleOptions {
 }
 export type InteruptRule = [string] | [string, InteruptRuleOptions]
 
-export class RemarkParser {
+export abstract class RemarkParser {
   public options: RemarkParserOptions
   public escape: string[]
   public file: VFile
@@ -66,7 +66,7 @@ export class RemarkParser {
   }
   public toOffset: (potision: Point) => number
   public unescape: (value: string) => string
-  public decode: (value: string, position: Point, handler: (value: string, location: Position) => void) => void
+  public decode: (value: string, position: Point, handler: (value: string, location: Position, source: string) => void) => void
   public decodeRaw: (value: string, position: Point) => string
   public interruptParagraph: InteruptRule[]
   public interruptList: InteruptRule[]
@@ -79,124 +79,157 @@ export class RemarkParser {
   public tokenizeBlock: Tokenize
   public tokenizeInline: Tokenize
   public tokenizeFactory: Factory
-
-  constructor (doc: Doc, file: VFile) {
-    this.file = file
-    this.offset = {}
-    this.options = Object.assign({}, this.options)
-    this.escape = getEscapes(this.options)
-
-    this.inList = false
-    this.inBlock = false
-    this.inLink = false
-    this.atStart = true
-
-    const vFileLocation = new VFileLocation(file)
-    this.toOffset = vFileLocation.toOffset.bind(vFileLocation)
-  }
-
   public parse: (this: RemarkParser) => Node
 }
 
-RemarkParser.prototype.parse = parse
-RemarkParser.prototype.unescape = unescape
-RemarkParser.prototype.decode = decoder
-RemarkParser.prototype.decodeRaw = decodeRaw
-RemarkParser.prototype.options = defaultOptions
+export const parserFactory = () => {
+  class Parser implements RemarkParser {
+    public options: RemarkParserOptions
+    public escape: string[]
+    public file: VFile
+    public inList: boolean
+    public inBlock: boolean
+    public inLink: boolean
+    public atStart: boolean
+    public offset: {
+      [key: number]: number
+    }
+    public toOffset: (potision: Point) => number
+    public unescape: (value: string) => string
+    public decode: (value: string, position: Point, handler: (value: string, location: Position, source: string) => void) => void
+    public decodeRaw: (value: string, position: Point) => string
+    public interruptParagraph: InteruptRule[]
+    public interruptList: InteruptRule[]
+    public interruptBlockquote: InteruptRule[]
+    public eof: Point
+    public inlineMethods: string[]
+    public blockMethods: string[]
+    public blockTokenizers: {[key: string]: TokenizeMethod}
+    public inlineTokenizers: {[key: string]: TokenizeMethod}
+    public tokenizeBlock: Tokenize
+    public tokenizeInline: Tokenize
+    public tokenizeFactory: Factory
 
-/* Nodes that can interupt a paragraph:
- *
- * ```markdown
- * A paragraph, followed by a thematic break.
- * ___
- * ```
- *
- * In the above example, the thematic break “interupts”
- * the paragraph. */
-RemarkParser.prototype.interruptParagraph = [
-  ['thematicBreak'],
-  ['atxHeading'],
-  ['fencedCode'],
-  ['blockquote'],
-  ['html'],
-  ['setextHeading', {commonmark: false}],
-  ['definition', {commonmark: false}],
-  ['footnote', {commonmark: false}],
-]
+    constructor (doc: Doc, file: VFile) {
+      this.file = file
+      this.offset = {}
+      this.options = Object.assign({}, this.options)
+      this.escape = getEscapes(this.options)
 
-/* Nodes that can interupt a list:
- *
- * ```markdown
- * - One
- * ___
- * ```
- *
- * In the above example, the thematic break “interupts”
- * the list. */
-RemarkParser.prototype.interruptList = [
-  ['fencedCode', {pedantic: false}],
-  ['thematicBreak', {pedantic: false}],
-  ['definition', {commonmark: false}],
-  ['footnote', {commonmark: false}],
-]
+      this.inList = false
+      this.inBlock = false
+      this.inLink = false
+      this.atStart = true
 
-/* Nodes that can interupt a blockquote:
- *
- * ```markdown
- * > A paragraph.
- * ___
- * ```
- *
- * In the above example, the thematic break “interupts”
- * the blockquote. */
-RemarkParser.prototype.interruptBlockquote = [
-  ['indentedCode', {commonmark: true}],
-  ['fencedCode', {commonmark: true}],
-  ['atxHeading', {commonmark: true}],
-  ['setextHeading', {commonmark: true}],
-  ['thematicBreak', {commonmark: true}],
-  ['html', {commonmark: true}],
-  ['list', {commonmark: true}],
-  ['definition', {commonmark: false}],
-  ['footnote', {commonmark: false}],
-]
+      const vFileLocation = new VFileLocation(file)
+      this.toOffset = vFileLocation.toOffset.bind(vFileLocation)
+    }
 
-RemarkParser.prototype.blockTokenizers = {
-  newline,
-  indentedCode,
-  fencedCode,
-  blockquote,
-  atxHeading,
-  thematicBreak,
-  list,
-  setextHeading,
-  html: blockHTML,
-  footnote: footnoteDefinition,
-  definition,
-  table,
-  paragraph,
+    public parse: (this: RemarkParser) => Node
+  }
+
+  Parser.prototype.parse = parse
+  Parser.prototype.unescape = unescape
+  Parser.prototype.decode = decoder
+  Parser.prototype.decodeRaw = decodeRaw
+  Parser.prototype.options = defaultOptions
+
+  /* Nodes that can interupt a paragraph:
+   *
+   * ```markdown
+   * A paragraph, followed by a thematic break.
+   * ___
+   * ```
+   *
+   * In the above example, the thematic break “interupts”
+   * the paragraph. */
+  Parser.prototype.interruptParagraph = [
+    ['thematicBreak'],
+    ['atxHeading'],
+    ['fencedCode'],
+    ['blockquote'],
+    ['html'],
+    ['setextHeading', {commonmark: false}],
+    ['definition', {commonmark: false}],
+    ['footnote', {commonmark: false}],
+  ]
+
+  /* Nodes that can interupt a list:
+   *
+   * ```markdown
+   * - One
+   * ___
+   * ```
+   *
+   * In the above example, the thematic break “interupts”
+   * the list. */
+  Parser.prototype.interruptList = [
+    ['fencedCode', {pedantic: false}],
+    ['thematicBreak', {pedantic: false}],
+    ['definition', {commonmark: false}],
+    ['footnote', {commonmark: false}],
+  ]
+
+  /* Nodes that can interupt a blockquote:
+   *
+   * ```markdown
+   * > A paragraph.
+   * ___
+   * ```
+   *
+   * In the above example, the thematic break “interupts”
+   * the blockquote. */
+  Parser.prototype.interruptBlockquote = [
+    ['indentedCode', {commonmark: true}],
+    ['fencedCode', {commonmark: true}],
+    ['atxHeading', {commonmark: true}],
+    ['setextHeading', {commonmark: true}],
+    ['thematicBreak', {commonmark: true}],
+    ['html', {commonmark: true}],
+    ['list', {commonmark: true}],
+    ['definition', {commonmark: false}],
+    ['footnote', {commonmark: false}],
+  ]
+
+  Parser.prototype.blockTokenizers = {
+    newline,
+    indentedCode,
+    fencedCode,
+    blockquote,
+    atxHeading,
+    thematicBreak,
+    list,
+    setextHeading,
+    html: blockHTML,
+    footnote: footnoteDefinition,
+    definition,
+    table,
+    paragraph,
+  }
+
+  Parser.prototype.inlineTokenizers = {
+    escape,
+    autoLink,
+    url,
+    html: inlineHTML,
+    link,
+    reference,
+    strong,
+    emphasis,
+    deletion: strikethrough,
+    code: inlineCode,
+    break: hardBreak,
+    text,
+  }
+
+  /* Expose precedence. */
+  Parser.prototype.blockMethods = Object.keys(Parser.prototype.blockTokenizers)
+  Parser.prototype.inlineMethods = Object.keys(Parser.prototype.inlineTokenizers)
+
+  /* Tokenizers. */
+  Parser.prototype.tokenizeBlock = tokenizer('block')
+  Parser.prototype.tokenizeInline = tokenizer('inline')
+  Parser.prototype.tokenizeFactory = tokenizer
+
+  return Parser
 }
-
-RemarkParser.prototype.inlineTokenizers = {
-  escape,
-  autoLink,
-  url,
-  html: inlineHTML,
-  link,
-  reference,
-  strong,
-  emphasis,
-  deletion: strikethrough,
-  code: inlineCode,
-  break: hardBreak,
-  text,
-}
-
-/* Expose precedence. */
-RemarkParser.prototype.blockMethods = Object.keys(RemarkParser.prototype.blockTokenizers)
-RemarkParser.prototype.inlineMethods = Object.keys(RemarkParser.prototype.inlineTokenizers)
-
-/* Tokenizers. */
-RemarkParser.prototype.tokenizeBlock = tokenizer('block')
-RemarkParser.prototype.tokenizeInline = tokenizer('inline')
-RemarkParser.prototype.tokenizeFactory = tokenizer
