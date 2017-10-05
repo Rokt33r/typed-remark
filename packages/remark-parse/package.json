@@ -41,9 +41,9 @@
     "rimraf": "^2.6.2",
     "source-map-support": "^0.4.18",
     "tslint": "^5.7.0",
-    "typed-unified": "^0.1.4",
+    "typed-unified": "^0.1.5",
     "typed-unist-builder": "^0.1.0",
-    "typed-vfile": "^0.2.0",
+    "typed-vfile": "^0.2.2",
     "typescript": "^2.5.2"
   },
   "peerDepedencies": {
