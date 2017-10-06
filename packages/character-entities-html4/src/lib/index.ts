@@ -1,5 +1,6 @@
 const characterEntitiesHTML4 = {
-  nbsp: ' ',
+  // nbsp: ' ',
+  nbsp: String.fromCharCode(160),
   iexcl: '¡',
   cent: '¢',
   pound: '£',
