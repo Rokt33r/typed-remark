@@ -4,6 +4,7 @@ import {
   Point,
   Position,
 } from 'typed-unist'
+import { stateToggleFactory } from 'typed-state-toggle'
 import { VFile } from 'typed-vfile'
 import { parse } from './parse'
 import VFileLocation from 'typed-vfile-location'
@@ -84,6 +85,10 @@ export interface RemarkParser {
   tokenizeInline: Tokenize
   tokenizeFactory: Factory
   parse: (this: RemarkParser) => Node
+  exitStart: () => () => void
+  enterList: () => () => void
+  enterLink: () => () => void
+  enterBlock: () => () => void
 }
 
 export const parserFactory = (): RemarkParserConstructor => {
@@ -113,6 +118,10 @@ export const parserFactory = (): RemarkParserConstructor => {
     public tokenizeBlock: Tokenize
     public tokenizeInline: Tokenize
     public tokenizeFactory: Factory
+    public exitStart: () => () => void
+    public enterList: () => () => void
+    public enterLink: () => () => void
+    public enterBlock: () => () => void
 
     constructor (doc: Doc, file: VFile) {
       this.file = file
@@ -137,6 +146,11 @@ export const parserFactory = (): RemarkParserConstructor => {
   Parser.prototype.decode = decoder
   Parser.prototype.decodeRaw = decodeRaw
   Parser.prototype.options = defaultOptions
+
+  Parser.prototype.exitStart = stateToggleFactory('atStart', true)
+  Parser.prototype.enterList = stateToggleFactory('inList', false)
+  Parser.prototype.enterLink = stateToggleFactory('inLink', false)
+  Parser.prototype.enterBlock = stateToggleFactory('inBlock', false)
 
   /* Nodes that can interupt a paragraph:
    *

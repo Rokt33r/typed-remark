@@ -322,10 +322,8 @@ export const list: TokenizeMethod = function (this: RemarkParser, eat: Eat, valu
     children: [],
   } as Parent)
 
-  // Enter List
-  this.inList = true
-  // Enter Block
-  this.inBlock = true
+  const exitList = this.enterList()
+  const exitBlock = this.enterBlock()
 
   isLoose = false
   index = -1
@@ -351,10 +349,8 @@ export const list: TokenizeMethod = function (this: RemarkParser, eat: Eat, valu
     eat(item)
   }
 
-  // Enter List
-  this.inList = false
-  // Enter Block
-  this.inBlock = false;
+  exitList()
+  exitBlock();
 
   // FIXME: Replace list typings
   (node as any).loose = isLoose

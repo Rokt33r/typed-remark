@@ -118,15 +118,14 @@ export const autoLink: TokenizeMethod = function (this: RemarkParser, eat: Eat, 
   /* Temporarily remove support for escapes in autolinks. */
   tokenize = self.inlineTokenizers.escape
   self.inlineTokenizers.escape = null
-  // Enter Link
-  self.inLink = true
+
+  const exitLink = self.enterLink()
 
   const contentNodes = self.tokenizeInline(content, now)
 
   self.inlineTokenizers.escape = tokenize
 
-  // Exit Link
-  self.inLink = false
+  exitLink()
 
   return eat(subvalue)({
     type: 'link',

@@ -54,6 +54,7 @@ export const definition: TokenizeMethod = function (this: RemarkParser, eat: Eat
   subvalue += character
   queue = ''
 
+  // Check if bracket is closed or return
   while (index < length) {
     character = value.charAt(index)
 
@@ -69,6 +70,7 @@ export const definition: TokenizeMethod = function (this: RemarkParser, eat: Eat
     index++
   }
 
+  // Check if colon is just after bracket close or stop
   if (
     !queue ||
     value.charAt(index) !== C_BRACKET_CLOSE ||
@@ -101,6 +103,7 @@ export const definition: TokenizeMethod = function (this: RemarkParser, eat: Eat
   queue = ''
   beforeURL = subvalue
 
+  // URL padded by brackets
   if (character === C_LT) {
     index++
 

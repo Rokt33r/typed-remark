@@ -1,6 +1,6 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
-import { Node, Point } from 'typed-unist'
+import { Node, Parent, Point } from 'typed-unist'
 import {
   isWhitespaceCharacter,
   normalize,
@@ -193,14 +193,12 @@ export const reference: TokenizeMethod = function (this: RemarkParser, eat: Eat,
   }
 
   if (type === T_LINK) {
-    // Enter Link
-    this.inLink = true;
+    const exitLink = this.enterLink();
 
     // FIXME: We should NOT use `as any`
-    (node as any).children = self.tokenizeInline(content, now)
+    (node as Parent).children = self.tokenizeInline(content, now)
 
-    // Exit Link
-    this.inLink = false
+    exitLink()
   } else if (type === T_IMAGE) {
     // FIXME: We should NOT use `as any`
     (node as any).alt = self.decodeRaw(self.unescape(content), now) || null

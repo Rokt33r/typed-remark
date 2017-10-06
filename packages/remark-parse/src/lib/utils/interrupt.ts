@@ -5,21 +5,18 @@ export function interrupt (interruptors: InteruptRule[], tokenizers: {[key: stri
   let interruptor
   let config: InteruptRuleOptions
   let fn
-  let offset
-  let ignore: boolean = false
+  let ignore: boolean
 
   for (interruptor of interruptors) {
     config = (interruptor[1] || {}) as InteruptRuleOptions
     fn = interruptor[0]
-    offset = -1
 
-    /**
-     * 1. Don't ignore if interrupt rule has no config
-     * 2. Ignore if ctx.options is set while interrupt rule config is set false
-     */
-    ignore = config.commonmark != null || config.pedantic != null
-      ? ctx.options.commonmark && !config.commonmark || ctx.options.pedantic && !config.pedantic
-      : false
+    ignore = false
+    if (config.pedantic != null && config.pedantic !== ctx.options.pedantic) {
+      ignore = true
+    } else if (config.commonmark != null && config.commonmark !== ctx.options.commonmark) {
+      ignore = true
+    }
 
     if (ignore) {
       continue

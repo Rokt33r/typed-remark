@@ -127,13 +127,11 @@ export const url: TokenizeMethod = function (this: RemarkParser, eat: Eat, value
     return true
   }
 
-  // Enter Link
-  self.inLink = true
+  const exitLink = self.enterLink()
 
   const children: Node[] = self.tokenizeInline(content, eat.now())
 
-  // Exit Link
-  self.inLink = false
+  exitLink()
 
   return eat(subvalue)({
     type: 'link',

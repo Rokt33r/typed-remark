@@ -1,6 +1,6 @@
 {
   "name": "typed-remark-parse",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "typed-markdown-escapes": "^0.1.0",
-    "typed-parse-entities": "^0.1.0",
+    "typed-parse-entities": "^0.1.2",
+    "typed-state-toggle": "^0.1.0",
     "typed-unist": "^0.1.0",
     "typed-unist-util-remove-position": "^0.1.0",
     "typed-vfile-location": "^0.1.0"

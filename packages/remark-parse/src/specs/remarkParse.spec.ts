@@ -129,7 +129,7 @@ describe('remark-parse', () => {
     }
   })
 
-  it.only('warns about entities', () => {
+  it('warns about entities', () => {
     const filePath = path.join(__dirname, '../../fixtures/input/entities-advanced.text')
     const file = new VFile(fs.readFileSync(filePath))
     const processor = unified().use(remarkParse)
@@ -141,18 +141,18 @@ describe('remark-parse', () => {
       '5:15: ' + notTerminated,
       '9:44: ' + notTerminated,
       '11:38: ' + notTerminated,
-      '13:16: ' + notTerminated,
       '14:16: ' + notTerminated,
       '14:37: ' + notTerminated,
-      '16:16: ' + notTerminated,
+      '13:16: ' + notTerminated,
       '17:17: ' + notTerminated,
       '18:21: ' + notTerminated,
-      '21:11: ' + notTerminated,
+      '16:16: ' + notTerminated,
       '23:16: ' + notTerminated,
       '23:37: ' + notTerminated,
-      '27:17: ' + notTerminated,
+      '21:11: ' + notTerminated,
       '28:17: ' + notTerminated,
       '29:21: ' + notTerminated,
+      '27:17: ' + notTerminated,
       '32:11: ' + notTerminated,
       '35:27: ' + notTerminated,
       '36:10: ' + notTerminated,
@@ -160,4 +160,77 @@ describe('remark-parse', () => {
       '41:10: ' + notTerminated,
     ])
   })
+
+  const fixturesPath = path.join(__dirname, '../../fixtures')
+  let trees = fs.readdirSync(path.join(fixturesPath, 'tree'))
+
+  fs.readdirSync(path.join(fixturesPath, 'input'))
+    .map(filePath => path.basename(filePath, '.text'))
+    .forEach(name => {
+      describe(name, () => {
+        const covered = []
+        const uncovered = []
+        for (const tree of trees) {
+          if (tree.slice(0, name.length + 1) === name + '.') {
+            covered.push(tree)
+          } else {
+            uncovered.push(tree)
+          }
+        }
+        const input = fs.readFileSync(path.join(fixturesPath, 'input', name + '.text')).toString()
+        covered
+          .forEach((tree) => {
+            const answer = JSON.parse(fs.readFileSync(path.join(fixturesPath, 'tree', tree)).toString())
+            const splitted = tree.split('.')
+
+            let gfm = true
+            let commonmark = false
+            let pedantic = false
+            let footnotes = false
+            let position = true
+            let nooutput = false
+
+            splitted
+              .forEach((option) => {
+                if (option === 'nogfm') {
+                  gfm = false
+                } else if (option === 'commonmark') {
+                  commonmark = true
+                } else if (option === 'pedantic') {
+                  pedantic = true
+                } else if (option === 'footnotes') {
+                  footnotes = true
+                } else if (option === 'noposition') {
+                  position = false
+                } else if (option === 'nooutput') {
+                  nooutput = true
+                }
+              })
+
+            if (nooutput) {
+               return
+            }
+
+            it(tree, () => {
+              const processor = unified()
+                .use(remarkParse, {
+                  gfm,
+                  commonmark,
+                  pedantic,
+                  footnotes,
+                  position,
+                })
+              const result = processor.parse(input)
+
+              try {
+                expect(result).toEqual(answer)
+              } catch (error) {
+                throw error
+                // throw new Error(tree)
+              }
+            })
+          })
+        trees = uncovered
+      })
+    })
 })

@@ -380,13 +380,11 @@ export const link: TokenizeMethod = function (this: RemarkParser, eat: Eat, valu
   if (isImage) {
     (node as any).alt = self.decodeRaw(self.unescape(content), now) || null
   } else {
-    // Enter Link
-    this.inLink = true;
+    const exitLink = this.enterLink();
 
     (node as Parent).children = self.tokenizeInline(content, now)
 
-    // Exit Link
-    this.inLink = false
+    exitLink()
   }
 
   return eat(subvalue)(node)

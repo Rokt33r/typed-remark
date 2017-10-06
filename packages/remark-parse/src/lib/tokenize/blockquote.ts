@@ -116,13 +116,11 @@ export const blockquote: TokenizeMethod = function (this: RemarkParser, eat: Eat
     currentLine++
   }
 
-  // Enter Block
-  self.inBlock = true
+  const exitBlock = self.enterBlock()
 
   children = self.tokenizeBlock(contents.join(C_NEWLINE), now)
 
-  // Exit Block
-  self.inBlock = false
+  exitBlock()
 
   return add({
     type: 'blockquote',

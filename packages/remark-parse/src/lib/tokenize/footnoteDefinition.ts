@@ -169,13 +169,11 @@ export const footnoteDefinition: TokenizeMethod = function (this: RemarkParser, 
 
   add = eat(subvalue)
 
-  // Enter Block
-  self.inBlock = true
+  const exitBlock = self.enterBlock()
 
   const children: Node[] = self.tokenizeBlock(content, now)
 
-  // Exit Block
-  self.inBlock = false
+  exitBlock()
 
   return add({
     type: 'footnoteDefinition',
