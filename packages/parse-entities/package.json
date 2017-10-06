@@ -1,6 +1,6 @@
 {
   "name": "typed-parse-entities",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -39,5 +39,10 @@
     "tslint": "^5.7.0",
     "typed-unist": "^0.1.0",
     "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "typed-character-entities": "^0.1.0",
+    "typed-character-entities-legacy": "^0.1.0",
+    "typed-character-reference-invalid": "^0.1.0"
   }
 }

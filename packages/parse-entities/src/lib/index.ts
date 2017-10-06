@@ -3,9 +3,9 @@ import {
   isHexadecimal,
   isAlphanumerical,
 } from './utils'
-import characterEntities from './characterEntities'
-import characterEntitiesLegacy from './characterEntitiesLegacy'
-import characterReferenceInvalid from './characterReferenceInvalid'
+import characterEntities from 'typed-character-entities'
+import characterEntitiesLegacy from 'typed-character-entities-legacy'
+import characterReferenceInvalid from 'typed-character-reference-invalid'
 import {
   Position,
   Point,
