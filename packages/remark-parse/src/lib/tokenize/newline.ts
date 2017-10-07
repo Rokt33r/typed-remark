@@ -1,6 +1,6 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
-import { isWhitespaceCharacter } from '../utils/isWhitespaceCharacter'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 
 /* Tokenise newline. */
 export const newline: TokenizeMethod = function (this: RemarkParser, eat: Eat, value: string, silent?: boolean): void | boolean {
