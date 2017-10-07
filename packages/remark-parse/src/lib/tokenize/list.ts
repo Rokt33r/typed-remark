@@ -1,7 +1,7 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node, Parent, Point } from 'typed-unist'
-import { isDecimal } from '../utils/isDecimal'
+import { isDecimal } from 'typed-string-utils'
 import { getIndentation } from '../utils/getIndentation'
 import { removeIndentation } from '../utils/removeIndentation'
 import { interrupt } from '../utils/interrupt'
