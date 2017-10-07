@@ -43,6 +43,7 @@
   "dependencies": {
     "typed-character-entities": "^0.1.0",
     "typed-character-entities-legacy": "^0.1.0",
-    "typed-character-reference-invalid": "^0.1.0"
+    "typed-character-reference-invalid": "^0.1.0",
+    "typed-string-utils": "^0.1.0"
   }
 }
