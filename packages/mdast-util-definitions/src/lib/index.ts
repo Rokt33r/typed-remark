@@ -4,11 +4,11 @@ import { visit } from 'typed-unist-util-visit'
 // 재료
 const hasOwnProperty = {}.hasOwnProperty
 
-interface DefinitionOptions {
+export interface DefinitionOptions {
   commonmark: boolean
 }
 
-interface DefinitionNode extends Node {
+export interface DefinitionNode extends Node {
   type: 'definition'
   identifier: string
   title?: string
