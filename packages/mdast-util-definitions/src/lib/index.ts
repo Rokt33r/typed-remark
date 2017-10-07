@@ -20,7 +20,7 @@ interface DefinitionCache {
 }
 
 /* Get a definition in `node` by `identifier`. */
-export function getDefinitionFactory (node: Node, options: DefinitionOptions) {
+export function getDefinitionFactory (node: Node, options?: DefinitionOptions) {
   return getterFactory(gather(node, options))
 }
 
