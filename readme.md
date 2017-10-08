@@ -19,7 +19,7 @@ type definitions, I choose rewritting whole dependencies in Typescript.
 - Discard polymorphism if possible
 - Rename vague variable and function names
 
-## Maintainer
+## Maintainers
 
-[Junyoung Choi](https://github.com/Rokt33r)
-[Jiseung Roh](https://github.com/rohjs)
+- [Junyoung Choi](https://github.com/Rokt33r)
+- [Jiseung Roh](https://github.com/rohjs)
