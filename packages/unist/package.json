@@ -19,10 +19,5 @@
     "lint": "../../node_modules/.bin/tslint -c ../../tslint.json -p ./tsconfig.json",
     "prepublishOnly": "npm run lint && npm run build",
     "test": "echo \"You don't have to test ${npm_package_name}.\""
-  },
-  "devDependencies": {
-    "rimraf": "^2.6.2",
-    "tslint": "^5.7.0",
-    "typescript": "^2.5.2"
   }
 }

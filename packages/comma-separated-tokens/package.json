@@ -27,13 +27,6 @@
     "test:watch": "jest -c jest.json --watch es/*"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.2",
-    "babel-jest": "^21.2.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "jest": "^21.2.1",
-    "rimraf": "^2.6.2",
-    "source-map-support": "^0.5.0",
-    "tslint": "^5.7.0",
-    "typescript": "^2.5.3"
+    "@types/jest": "^21.1.2"
   }
 }
