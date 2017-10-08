@@ -1,22 +1,25 @@
+> :construction: Still under construction..!!
+
 # Typed Remark
 
 A fork of Remark markdown processor, written in Typescript!
 
-## Packages
+## Why did you fork remark?
 
-- unist
-- unist-util-stringify-position
-- vfile
-- vfile-location
-- unified
+I like Remark processor. But, after starting using Typescript, I found there are
+tons of type definitions are needed for Remark and its tons of dependencies.
+But, I don't understand this markdown processor deeply. So, rather than making
+type definitions, I choose rewritting whole dependencies in Typescript.
 
-## Why?
+## What we are doing
 
-I really like [Remark] package. It is really well written and maintained.
+- Use typescript
+- Use ES NEXT(`import`, `let`, `const`... and lots of good things)
+- Discard unnecessary assertion
+- Discard polymorphism if possible
+- Rename vague variable and function names
 
-But, after I started using typescript, I found there is no type definition of it and its APIs are hard to be defined because they have tons of various way to use.
+## Maintainer
 
-So, this package is some kind of a POC to use Typescript.
-
-[remark]:(https://github.com/wooorm/remark)
-[wooorm]:(https://github.com/wooorm)
+[Junyoung Choi](https://github.com/Rokt33r)
+[Jiseung Roh](https://github.com/rohjs)
