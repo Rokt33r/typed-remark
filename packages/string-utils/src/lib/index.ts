@@ -1,4 +1,5 @@
 export * from './collapseWhiteSpace'
+export * from './collapseLines'
 export * from './detab'
 export * from './isAlphabetical'
 export * from './isAlphanumerical'
