@@ -1,12 +1,5 @@
 const devDependencies = [
-  'typescript',
-  'jest',
-  'tslint',
   '@types/jest',
-  'rimraf',
-  'babel-jest',
-  'babel-plugin-transform-es2015-modules-commonjs',
-  'source-map-support',
 ]
 
 const templates = [
@@ -24,15 +17,15 @@ const paths = {
 
 const scripts = {
   'build': 'npm run clean && npm run build:es && npm run build:node',
-  'build:es': 'tsc -p . -d --declarationDir typings --outDir es',
-  'build:node': 'tsc -p . -m commonjs --outDir node',
-  'build:watch': 'tsc -p . -w --outDir es',
-  'clean': 'rimraf es node typings',
-  'lint': 'tslint -c ../../tslint.json -p ./tsconfig.json',
+  'build:es': '../../node_modules/.bin/tsc -p . -d --declarationDir typings --outDir es',
+  'build:node': '../../node_modules/.bin/tsc -p . -m commonjs --outDir node',
+  'build:watch': '../../node_modules/.bin/tsc -p . -w --outDir es',
+  'clean': '../../node_modules/.bin/rimraf es node typings',
+  'lint': '../../node_modules/.bin/tslint -c ../../tslint.json -p ./tsconfig.json',
   'prepublishOnly': 'npm run lint && npm run build && npm run test',
-  'test': 'jest -c jest.json',
-  'test:quick': 'jest -c jest.json es/*',
-  'test:watch': 'jest -c jest.json --watch es/*',
+  'test': '../../node_modules/.bin/jest -c jest.json',
+  'test:quick': '../../node_modules/.bin/jest -c jest.json es/*',
+  'test:watch': '../../node_modules/.bin/jest -c jest.json --watch es/*',
 }
 
 const files = [
