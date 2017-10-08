@@ -2,6 +2,8 @@
 
 # Typed Remark
 
+[![Build Status](https://travis-ci.org/Rokt33r/typed-remark.svg?branch=master)](https://travis-ci.org/Rokt33r/typed-remark)
+
 A fork of Remark markdown processor, written in Typescript!
 
 ## Why did you fork remark?
