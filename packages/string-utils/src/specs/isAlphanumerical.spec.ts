@@ -3,7 +3,7 @@ import {
   isHexadecimal,
   isAlphabetical,
   isAlphanumerical,
-} from '../lib/utils'
+} from '../lib'
 
 describe('isDecimal', () => {
   it('asserts if a given character is decimal(Regression Test)', () => {

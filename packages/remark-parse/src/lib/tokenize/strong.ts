@@ -1,9 +1,7 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node, Point } from 'typed-unist'
-import {
-  isWhitespaceCharacter,
-} from '../utils'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 import { locateStrong } from '../locate/strong'
 
 const C_ASTERISK = '*'

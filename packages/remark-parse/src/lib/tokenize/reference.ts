@@ -1,10 +1,8 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node, Parent, Point } from 'typed-unist'
-import {
-  isWhitespaceCharacter,
-  normalize,
-} from '../utils'
+import { normalize } from '../utils'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 import { locateLink } from '../locate/link'
 
 const T_LINK = 'link'

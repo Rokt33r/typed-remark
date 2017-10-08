@@ -1,12 +1,12 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node, Point } from 'typed-unist'
+import { interrupt } from '../utils'
 import {
   isDecimal,
   trimTrailingLines,
-  interrupt,
   trimLeft,
-} from '../utils'
+} from 'typed-string-utils'
 
 const C_NEWLINE = '\n'
 const C_TAB = '\t'

@@ -1,4 +1,4 @@
-import { isWhitespaceCharacter } from '../utils/isWhitespaceCharacter'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 import { parseEntities } from 'typed-parse-entities'
 import { locateTag } from '../locate/tag'
 import { TokenizeMethod, Eat } from '../tokenizer'

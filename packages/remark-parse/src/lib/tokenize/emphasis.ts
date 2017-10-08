@@ -1,8 +1,10 @@
-import { isWhitespaceCharacter } from '../utils/isWhitespaceCharacter'
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node } from 'typed-unist'
-import { isWordCharacter } from '../utils/isWordCharacter'
+import {
+  isWordCharacter,
+  isWhitespaceCharacter,
+} from 'typed-string-utils'
 import { locateEmphasis } from '../locate/emphasis'
 
 const C_ASTERISK = '*'

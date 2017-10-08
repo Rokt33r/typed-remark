@@ -1,7 +1,7 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node } from 'typed-unist'
-import { isAlphabetical } from '../utils/isAlphabetical'
+import { isAlphabetical } from 'typed-string-utils'
 import { locateTag } from '../locate/tag'
 import { tag } from '../utils/html'
 
