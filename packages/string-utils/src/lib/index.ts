@@ -1,3 +1,4 @@
+export * from './ccount'
 export * from './collapseWhiteSpace'
 export * from './collapseLines'
 export * from './detab'
