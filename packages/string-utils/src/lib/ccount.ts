@@ -1,4 +1,4 @@
-/* Count characters */
+/** Count characters */
 export function ccount (value: string, character: string) {
   let count = 0
   let index
