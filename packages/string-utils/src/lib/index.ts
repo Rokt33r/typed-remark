@@ -1,5 +1,5 @@
 export * from './ccount'
-export * from './collapseWhiteSpace'
+export * from './collapseWhitespace'
 export * from './collapseLines'
 export * from './detab'
 export * from './isAlphabetical'
