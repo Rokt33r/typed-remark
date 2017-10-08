@@ -1,3 +1,4 @@
+export * from './detab'
 export * from './isAlphabetical'
 export * from './isAlphanumerical'
 export * from './isDecimal'
