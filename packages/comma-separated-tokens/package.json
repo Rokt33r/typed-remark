@@ -1,0 +1,32 @@
+{
+  "name": "typed-comma-separated-tokens",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Jiseung Roh <jiseung.roh@gmail.com> (http://rohjs.github.io/)",
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ],
+  "main": "node/lib/index.js",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && npm run build:es && npm run build:node",
+    "build:es": "tsc -p . -d --declarationDir typings --outDir es",
+    "build:node": "tsc -p . -m commonjs --outDir node",
+    "build:watch": "tsc -p . -w --outDir es",
+    "clean": "rimraf es node typings",
+    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
+    "test": "jest -c jest.json",
+    "test:quick": "jest -c jest.json es/*",
+    "test:watch": "jest -c jest.json --watch es/*"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.2"
+  }
+}

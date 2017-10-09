@@ -1,7 +1,7 @@
 import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node } from 'typed-unist'
-import { isWhitespaceCharacter } from '../utils/isWhitespaceCharacter'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 import { normalize } from '../utils/normalize'
 
 const C_DOUBLE_QUOTE = '"'

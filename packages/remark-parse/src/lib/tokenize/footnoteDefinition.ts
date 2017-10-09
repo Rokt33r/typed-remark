@@ -1,7 +1,7 @@
 import { TokenizeMethod, Eat, Apply } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node, Point } from 'typed-unist'
-import { isWhitespaceCharacter } from '../utils/isWhitespaceCharacter'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 import { normalize } from '../utils/normalize'
 
 const C_BACKSLASH = '\\'
