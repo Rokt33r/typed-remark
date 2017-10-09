@@ -1,0 +1,26 @@
+{
+  "name": "typed-mdast",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "files": [
+    "build/lib/*",
+    "src/lib/*"
+  ],
+  "main": "build/lib/index.js",
+  "module": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc -p . -d",
+    "build:watch": "../../node_modules/.bin/tsc -p . -w -d",
+    "clean": "../../node_modules/.bin/rimraf build",
+    "lint": "../../node_modules/.bin/tslint -c ../../tslint.json -p ./tsconfig.json",
+    "prepublishOnly": "npm run lint && npm run build",
+    "test": "echo \"You don't have to test ${npm_package_name}.\""
+  },
+  "devDependencies": {
+    "typed-unist": "^0.1.0"
+  }
+}
