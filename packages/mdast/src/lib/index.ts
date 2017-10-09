@@ -195,7 +195,7 @@ export type ReferenceTypes = 'shortcut' | 'collapsed' | 'full'
  * `referenceType` is needed to detect if a reference was meant as
  * a reference (`[foo][]`) or just unescaped brackets (`[foo]`).
  */
-interface LinkReference extends Parent {
+export interface LinkReference extends Parent {
   type: 'linkReference'
   identifier: string
   referenceType: ReferenceTypes
@@ -209,7 +209,7 @@ interface LinkReference extends Parent {
  * a reference (`![foo][]`) or just unescaped brackets (`![foo]`). See
  * `LinkReference` for the definition of `referenceType`.
  */
-interface ImageReference extends Node {
+export interface ImageReference extends Node {
   type: 'imageReference'
   identifier: string
   referenceType: ReferenceTypes
@@ -220,7 +220,7 @@ interface ImageReference extends Node {
  * `FootnoteReference` (`Node`) is like `Footnote`, but its content is already
  * outside the documents flow: placed in a `FootnoteDefinition`.
  */
-interface FootnoteReference extends Node {
+export interface FootnoteReference extends Node {
   type: 'footnoteReference'
   identifier: string
 }
@@ -229,7 +229,7 @@ interface FootnoteReference extends Node {
  * `Definition` (`Node`) represents the definition (i.e., location and title) of
  * a `LinkReference` or an `ImageReference`.
  */
-interface Definition extends Node {
+export interface Definition extends Node {
   type: 'definition'
   identifier: string
   title?: string
@@ -240,7 +240,7 @@ interface Definition extends Node {
  * `FootnoteDefinition` (`Parent`) represents the definition (i.e., content) of
  * a `FootnoteReference`.
  */
-interface FootnoteDefinition extends Parent {
+export interface FootnoteDefinition extends Parent {
   type: 'footnoteDefinition'
   identifier: string
 }
@@ -249,6 +249,6 @@ interface FootnoteDefinition extends Parent {
  * `TextNode` (`Text`) represents everything that is just text. Note that its
  * `type` property is `text`, but it is different from `Text`.
  */
-interface TextNode extends Text {
+export interface TextNode extends Text {
   type: 'text'
 }
