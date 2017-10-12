@@ -1,9 +1,11 @@
 import { Node } from 'typed-unist'
+import { Element } from 'typed-hast'
 
 export function isElement (node: Node, tagNames?: string | string[]): boolean {
-/* Check if, whether `tagNames` is given, a node is an element
-* or an element matching `tagNames`. */
-  if (node.type !== 'element' || typeof (node as any).tagName !== 'string') {
+  if (
+    node.type !== 'element' ||
+    typeof (node as Element).tagName !== 'string'
+  ) {
     return false
   }
 
@@ -11,11 +13,9 @@ export function isElement (node: Node, tagNames?: string | string[]): boolean {
     return true
   }
 
-  const name = (node as any).tagName
-
   if (typeof tagNames === 'string') {
-    return name === tagNames
+    return (node as Element).tagName === tagNames
   }
 
-  return tagNames.indexOf(name) !== -1
+  return tagNames.indexOf((node as Element).tagName) !== -1
 }
