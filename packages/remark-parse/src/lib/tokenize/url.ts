@@ -2,7 +2,7 @@ import { TokenizeMethod, Eat } from '../tokenizer'
 import { RemarkParser } from '../RemarkParser'
 import { Node } from 'typed-unist'
 import { parseEntities } from 'typed-parse-entities'
-import { isWhitespaceCharacter } from '../utils'
+import { isWhitespaceCharacter } from 'typed-string-utils'
 import { locateURL } from '../locate/url'
 
 const C_BRACKET_OPEN = '['

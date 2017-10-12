@@ -2,7 +2,7 @@ import {
   isDecimal,
   isHexadecimal,
   isAlphanumerical,
-} from './utils'
+} from 'typed-string-utils'
 import characterEntities from 'typed-character-entities'
 import characterEntitiesLegacy from 'typed-character-entities-legacy'
 import characterReferenceInvalid from 'typed-character-reference-invalid'

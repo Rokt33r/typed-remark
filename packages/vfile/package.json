@@ -16,29 +16,24 @@
   "types": "typings/lib/index.d.ts",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
-    "build:es": "tsc -p . -d --declarationDir typings --outDir es",
-    "build:node": "tsc -p . -m commonjs --outDir node",
-    "build:watch": "tsc -p . -w --outDir es",
-    "clean": "rimraf es node typings",
-    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
+    "build:es": "../../node_modules/.bin/tsc -p . -d --declarationDir typings --outDir es",
+    "build:node": "../../node_modules/.bin/tsc -p . -m commonjs --outDir node",
+    "build:watch": "../../node_modules/.bin/tsc -p . -w --outDir es",
+    "clean": "../../node_modules/.bin/rimraf es node typings",
+    "lint": "../../node_modules/.bin/tslint -c ../../tslint.json -p ./tsconfig.json",
     "prepublishOnly": "npm run lint && npm run build && npm run test",
-    "test": "jest -c jest.json",
-    "test:quick": "jest -c jest.json es/*",
-    "test:watch": "jest -c jest.json --watch es/*"
+    "test": "../../node_modules/.bin/jest -c jest.json",
+    "test:quick": "../../node_modules/.bin/jest -c jest.json es/*",
+    "test:watch": "../../node_modules/.bin/jest -c jest.json --watch es/*"
   },
   "dependencies": {
     "replace-ext": "^1.0.0",
-    "typed-unist": "^0.1.0",
     "typed-unist-util-stringify-position": "^0.2.2"
   },
   "devDependencies": {
     "@types/jest": "^20.0.8",
     "@types/node": "^8.0.28",
     "@types/replace-ext": "0.0.27",
-    "babel-jest": "^21.0.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "jest": "^21.1.0",
-    "source-map-support": "^0.4.18",
-    "typescript": "^2.5.2"
+    "typed-unist": "^0.1.0"
   }
 }
