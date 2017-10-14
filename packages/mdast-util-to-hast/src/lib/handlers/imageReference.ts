@@ -1,0 +1,20 @@
+import * as normalize from 'mdurl/encode'
+import { failsafe } from '../failsafe'
+import { H } from '../'
+import { ImageReference } from 'typed-mdast'
+
+/* Transform a reference to an image. */
+export function imageReference (h: H, node: ImageReference) {
+  const def = h.definition(node.identifier)
+  const props: {
+    src: string
+    alt: string
+    title?: string
+  } = {src: normalize((def && def.url) || ''), alt: node.alt}
+
+  if (def && def.title !== null && def.title !== undefined) {
+    props.title = def.title
+  }
+
+  return failsafe(h, node, def) || h(node, 'img', props)
+}
