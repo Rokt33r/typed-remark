@@ -28,7 +28,7 @@ export interface ToHastOptions extends DefinitionOptions {
 }
 
 export interface Handler {
-  (h: H, node: Node, parent?: Parent): Node
+  (h: H, node: Node, parent?: Parent): Node | Node[]
 }
 
 export interface H {
@@ -121,7 +121,7 @@ function factory (tree: Node, options: ToHastOptions) {
 }
 
 /* Transform `tree`, which is an MDAST node, to a HAST node. */
-export function toHAST (tree: Node, options: ToHastOptions) {
+export function toHAST (tree: Node, options?: ToHastOptions) {
   const h = factory(tree, options)
   const node = one(h, tree)
   const footnotes = generateFootnotes(h)

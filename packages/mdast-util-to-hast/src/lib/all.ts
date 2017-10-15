@@ -1,4 +1,4 @@
-import { Parent, Node } from 'typed-unist'
+import { Parent, Node, Text } from 'typed-unist'
 import { one } from './one'
 import { trimLeft } from 'typed-string-utils'
 import { H } from './'
@@ -9,28 +9,28 @@ export function all (h: H, parent: Parent): Node[] {
   const length = nodes.length
   let values: Node[] = []
   let index = -1
-  let result
-  let head
 
   while (++index < length) {
-    result = one(h, nodes[index], parent)
-
+    const result = one(h, nodes[index], parent)
     if (result) {
       if (index && nodes[index - 1].type === 'break') {
-        if (result.value) {
-          result.value = trimLeft(result.value)
+        if ((result as Text).value) {
+          trimLeftOfValue(result as Text)
         }
 
-        head = result.children && result.children[0]
+        const head = (result as Parent).children && (result as Parent).children[0]
 
-        if (head && head.value) {
-          head.value = trimLeft(head.value)
+        if (head && (head as Text).value) {
+          trimLeftOfValue(head as Text)
         }
       }
-
       values = values.concat(result)
     }
   }
 
   return values
+}
+
+function trimLeftOfValue (node: Text) {
+  node.value = trimLeft(node.value)
 }

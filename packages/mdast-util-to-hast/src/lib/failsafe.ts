@@ -14,6 +14,6 @@ export function failsafe (h: H, node: LinkReference | ImageReference, definition
       return u('text', '![' + node.alt + ']')
     }
 
-    return [u('text', '[')].concat(all(h, node as Parent), u('text', ']'))
+    return [u('text', '['), ...all(h, node as Parent), u('text', ']')]
   }
 }

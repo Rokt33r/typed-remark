@@ -1,4 +1,3 @@
-import { Parent } from 'typed-unist'
 import { Blockquote } from 'typed-mdast'
 import { all } from '../all'
 import { wrap } from '../wrap'
