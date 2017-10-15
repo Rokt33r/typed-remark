@@ -31,6 +31,7 @@
     "typed-hast": "^0.1.0"
   },
   "dependencies": {
+    "mdurl": "^1.0.1",
     "typed-string-utils": "^0.2.0"
   }
 }
