@@ -2,9 +2,10 @@ import { wrap } from '../wrap'
 import { all } from '../all'
 import { H } from '../'
 import { List } from 'typed-mdast'
+import { Node } from 'typed-unist'
 
 /* Transform a list. */
-export function list (h: H, node: List) {
+export function list (h: H, node: List): Node {
   const props: {
     start?: number
   } = {}

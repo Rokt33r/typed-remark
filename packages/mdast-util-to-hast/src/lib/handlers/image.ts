@@ -1,9 +1,10 @@
 import * as mdurl from 'mdurl'
 import { H } from '../'
+import { Node } from 'typed-unist'
 import { Image } from 'typed-mdast'
 
 /* Transform an image. */
-export function image (h: H, node: Image) {
+export function image (h: H, node: Image): Node {
   const props: {
     src: string
     alt: string

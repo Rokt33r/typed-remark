@@ -1,10 +1,11 @@
 import * as mdurl from 'mdurl'
 import { failsafe } from '../failsafe'
 import { H } from '../'
+import { Node } from 'typed-unist'
 import { ImageReference } from 'typed-mdast'
 
 /* Transform a reference to an image. */
-export function imageReference (h: H, node: ImageReference) {
+export function imageReference (h: H, node: ImageReference): Node | Node[] {
   const def = h.definition(node.identifier)
   const props: {
     src: string

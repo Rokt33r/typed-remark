@@ -4,9 +4,10 @@ import { all } from '../all'
 import { H } from '../'
 import { Parent } from 'typed-unist'
 import { List, ListItem } from 'typed-mdast'
+import { Node } from 'typed-unist'
 
 /* Transform a list-item. */
-export function listItem (h: H, node: ListItem, parent: List) {
+export function listItem (h: H, node: ListItem, parent: List): Node {
   const children = node.children
   const head = children[0]
   const props: {

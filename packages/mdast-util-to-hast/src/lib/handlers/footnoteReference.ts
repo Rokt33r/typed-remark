@@ -1,10 +1,10 @@
 import u from 'typed-unist-builder'
-import { Node } from 'typed-unist'
 import { H } from '../'
+import { Node } from 'typed-unist'
 import { FootnoteReference } from 'typed-mdast'
 
 /* Transform a reference to a footnote. */
-export function footnoteReference (h: H, node: FootnoteReference) {
+export function footnoteReference (h: H, node: FootnoteReference): Node {
   const identifier = node.identifier
 
   return h({

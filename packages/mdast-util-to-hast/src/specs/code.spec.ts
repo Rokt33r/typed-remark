@@ -9,7 +9,7 @@ describe('Code', () => {
 
     expect(result).toEqual(u('element', {tagName: 'pre', properties: {}}, [
       u('element', {tagName: 'code', properties: {}}, [
-        u('text', 'foxtrot()\ngolf.hotel()\n')
+        u('text', 'foxtrot()\ngolf.hotel()\n'),
       ]),
     ]))
   })

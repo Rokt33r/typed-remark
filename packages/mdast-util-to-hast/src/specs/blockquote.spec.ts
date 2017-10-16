@@ -15,7 +15,7 @@ describe('Blockquote', () => {
       u('element', {tagName: 'p', properties: {}}, [u('text', 'charlie')]),
       u('text', '\n'),
       u('element', {tagName: 'p', properties: {}}, [u('text', 'delta')]),
-      u('text', '\n')
+      u('text', '\n'),
     ]))
   })
 })

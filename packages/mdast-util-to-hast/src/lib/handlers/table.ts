@@ -6,7 +6,7 @@ import { Table, TableRow, TableCell } from 'typed-mdast'
 import { Element } from 'typed-hast'
 
 /* Transform a table. */
-export function table (h: H, node: Table) {
+export function table (h: H, node: Table): Node {
   const rows = node.children as TableRow[]
   let index = rows.length
   const align = node.align

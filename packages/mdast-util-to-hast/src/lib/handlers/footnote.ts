@@ -1,9 +1,10 @@
 import { footnoteReference } from './footnoteReference'
 import { H } from '../'
+import { Node } from 'typed-unist'
 import { Footnote, FootnoteDefinition, FootnoteReference } from 'typed-mdast'
 
 /* Transform an inline footnote. */
-export function footnote (h: H, node: Footnote) {
+export function footnote (h: H, node: Footnote): Node {
   const identifiers = []
   let identifier = 1
   const footnotes = h.footnotes

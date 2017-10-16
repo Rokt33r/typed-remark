@@ -1,10 +1,11 @@
 import * as mdurl from 'mdurl'
 import { H } from '../'
-import { Link } from 'typed-mdast'
 import { all } from '../all'
+import { Node } from 'typed-unist'
+import { Link } from 'typed-mdast'
 
 /* Transform a link. */
-export function link (h: H, node: Link) {
+export function link (h: H, node: Link): Node {
   const props: {
     href: string
     title?: string
