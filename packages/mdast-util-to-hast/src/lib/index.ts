@@ -22,7 +22,7 @@ export interface HProperties {
 
 export interface ToHastOptions extends DefinitionOptions {
   allowDangerousHTML?: boolean
-  handlers: {
+  handlers?: {
     [key: string]: Handler
   }
 }
@@ -102,8 +102,7 @@ function factory (tree: Node, options: ToHastOptions) {
       }
     }
 
-    const ctx: Node = left
-    // const ctx: Node = left && left.position ? left : {position: left}
+    const ctx: Node = left ? left : {} as Node
 
     if (ctx.position) {
       right.position = {

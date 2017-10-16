@@ -39,8 +39,8 @@ export function table (h: H, node: Table) {
       position: result[0].position,
     } as Node, 'thead', wrap([result[0]], true)),
     h({
-      position: {
-        start: result[1].position ? result[1].position.start : null,
+      position: (result[1].position || result[result.length - 1].position) && {
+        start: result[1].position && result[1].position.start,
         end: result[result.length - 1].position && result[result.length - 1].position.end,
       },
     } as Node, 'tbody', wrap(result.slice(1), true)),

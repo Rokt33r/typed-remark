@@ -1,4 +1,4 @@
-import * as normalize from 'mdurl/encode'
+import * as mdurl from 'mdurl'
 import { failsafe } from '../failsafe'
 import { H } from '../'
 import { LinkReference } from 'typed-mdast'
@@ -10,7 +10,7 @@ export function linkReference (h: H, node: LinkReference) {
   const props: {
     href: string
     title?: string
-  } = {href: normalize((def && def.url) || '')}
+  } = {href: mdurl.encode((def && def.url) || '')}
 
   if (def && def.title !== null && def.title !== undefined) {
     props.title = def.title

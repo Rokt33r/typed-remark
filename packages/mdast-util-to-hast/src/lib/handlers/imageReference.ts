@@ -1,4 +1,4 @@
-import * as normalize from 'mdurl/encode'
+import * as mdurl from 'mdurl'
 import { failsafe } from '../failsafe'
 import { H } from '../'
 import { ImageReference } from 'typed-mdast'
@@ -10,7 +10,7 @@ export function imageReference (h: H, node: ImageReference) {
     src: string
     alt: string
     title?: string
-  } = {src: normalize((def && def.url) || ''), alt: node.alt}
+  } = {src: mdurl.encode((def && def.url) || ''), alt: node.alt}
 
   if (def && def.title !== null && def.title !== undefined) {
     props.title = def.title

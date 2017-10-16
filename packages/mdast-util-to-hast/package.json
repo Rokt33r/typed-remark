@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "mdurl": "^1.0.1",
+    "typed-mdast-util-definitions": "^0.1.2",
     "typed-string-utils": "^0.2.0"
   }
 }

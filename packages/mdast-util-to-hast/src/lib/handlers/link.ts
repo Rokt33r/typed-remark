@@ -1,4 +1,4 @@
-import * as normalize from 'mdurl/encode'
+import * as mdurl from 'mdurl'
 import { H } from '../'
 import { Link } from 'typed-mdast'
 import { all } from '../all'
@@ -8,7 +8,7 @@ export function link (h: H, node: Link) {
   const props: {
     href: string
     title?: string
-  } = {href: normalize(node.url)}
+  } = {href: mdurl.encode(node.url)}
 
   if (node.title !== null && node.title !== undefined) {
     props.title = node.title

@@ -24,7 +24,7 @@ import { thematicBreak } from './thematicBreak'
 
 export default {
   blockquote,
-  break: hardBreak,
+  break: hardBreak as Handler,
   code,
   delete: strikethrough,
   emphasis,
@@ -45,6 +45,7 @@ export default {
   table,
   text,
   thematicBreak,
+  toml: ignore,
   yaml: ignore,
   definition: ignore,
   footnoteDefinition: ignore,
