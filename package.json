@@ -9,7 +9,7 @@
   "scripts": {
     "build": "lerna run build",
     "cp": "ts-node scripts/cp",
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap && lerna run build",
     "lint": "lerna run lint",
     "sort-package-json": "lerna exec sort-package-json",
     "pretest": "npm run lint",

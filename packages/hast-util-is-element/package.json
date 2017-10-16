@@ -9,7 +9,7 @@
     "build:watch": "../../node_modules/.bin/tsc -p . -w --outDir es",
     "clean": "../../node_modules/.bin/rimraf es node typings",
     "lint": "../../node_modules/.bin/tslint -c ../../tslint.json -p ./tsconfig.json",
-    "prepare": "npm run lint && npm run build && npm run test",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
     "test": "../../node_modules/.bin/jest -c jest.json",
     "test:quick": "../../node_modules/.bin/jest -c jest.json es/*",
     "test:watch": "../../node_modules/.bin/jest -c jest.json --watch es/*"
