@@ -45,6 +45,7 @@ export function generateFootnotes (h: H) {
       type: 'list',
       ordered: true,
       children: listItems,
+      loose: false,
     }),
   ], true))
 }
