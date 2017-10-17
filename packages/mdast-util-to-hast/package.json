@@ -1,19 +1,8 @@
 {
-  "name": "typed-mdast-util-definitions",
-  "version": "0.1.2",
+  "name": "typed-mdast-util-to-hast",
+  "version": "0.1.1",
   "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "Jiseung Roh <jiseung.roh@gmail.com> (http://rohjs.github.io/)",
-  "files": [
-    "src/lib/*",
-    "es/lib/*",
-    "node/lib/*",
-    "typings/lib/*"
-  ],
   "main": "node/lib/index.js",
-  "module": "es/lib/index.js",
-  "types": "typings/lib/index.d.ts",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
     "build:es": "../../node_modules/.bin/tsc -p . -d --declarationDir typings --outDir es",
@@ -26,14 +15,27 @@
     "test:quick": "../../node_modules/.bin/jest -c jest.json es/*",
     "test:watch": "../../node_modules/.bin/jest -c jest.json --watch es/*"
   },
-  "dependencies": {
-    "typed-unist-util-visit": "^0.1.0"
-  },
+  "keywords": [],
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "license": "ISC",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ],
   "devDependencies": {
     "@types/jest": "^21.1.2",
+    "typed-hast": "^0.1.0",
     "typed-mdast": "^0.1.1",
-    "typed-remark-parse": "^0.1.2",
-    "typed-unified": "^0.1.5",
     "typed-unist": "^0.1.0"
+  },
+  "dependencies": {
+    "mdurl": "^1.0.1",
+    "typed-mdast-util-definitions": "^0.1.2",
+    "typed-string-utils": "^0.2.0",
+    "typed-unist-builder": "^0.1.0"
   }
 }

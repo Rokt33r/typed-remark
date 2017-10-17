@@ -6,7 +6,7 @@ import { Definition } from 'typed-mdast'
 const hasOwnProperty = {}.hasOwnProperty
 
 export interface DefinitionOptions {
-  commonmark: boolean
+  commonmark?: boolean
 }
 
 interface DefinitionCache {
