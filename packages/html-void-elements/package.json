@@ -1,6 +1,7 @@
 {
-  "name": "typed-hast-util-is-element",
+  "name": "typed-html-void-elements",
   "version": "0.1.0",
+  "description": "",
   "main": "node/lib/index.js",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
@@ -26,10 +27,6 @@
     "typings/lib/*"
   ],
   "devDependencies": {
-    "@types/jest": "^21.1.2",
-    "typed-hast": "^0.1.0",
-    "typed-unist": "^0.1.0"
-  },
-  "dependencies": {},
-  "description": ""
+    "@types/jest": "^21.1.2"
+  }
 }
