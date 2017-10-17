@@ -7,13 +7,13 @@ interface PropertyToAttributeMapping {
   [key: string]: string
 }
 
-interface Information {
+export interface Information {
   name: string
   propertyName: string
   [key: string]: string | boolean | any
 }
 
-interface GetPropertyInformation {
+export interface GetPropertyInformation {
   (property: string): Information
   all?: {
     [key: string]: Information
@@ -247,7 +247,8 @@ for (property in propertyConfig) {
     name: aName,
     propertyName: property,
     mustUseAttribute: check(config, USE_ATTRIBUTE),
-    mustUseProperty: check(config, USE_PROPERTY),
+    mustUseProperty:
+     check(config, USE_PROPERTY),
     boolean: check(config, BOOLEAN_VALUE),
     overloadedBoolean: check(config, OVERLOADED_BOOLEAN_VALUE),
     numeric: check(config, NUMERIC_VALUE),
