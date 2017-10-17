@@ -1,6 +1,7 @@
 {
   "name": "typed-hast-util-is-element",
   "version": "0.1.0",
+  "description": "",
   "main": "node/lib/index.js",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
@@ -30,6 +31,5 @@
     "typed-hast": "^0.1.0",
     "typed-unist": "^0.1.0"
   },
-  "dependencies": {},
-  "description": ""
+  "dependencies": {}
 }
