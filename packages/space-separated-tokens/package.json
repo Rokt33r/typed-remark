@@ -1,0 +1,32 @@
+{
+  "name": "typed-space-separated-tokens",
+  "version": "0.1.0",
+  "description": "",
+  "main": "node/lib/index.js",
+  "scripts": {
+    "build": "npm run clean && npm run build:es && npm run build:node",
+    "build:es": "../../node_modules/.bin/tsc -p . -d --declarationDir typings --outDir es",
+    "build:node": "../../node_modules/.bin/tsc -p . -m commonjs --outDir node",
+    "build:watch": "../../node_modules/.bin/tsc -p . -w --outDir es",
+    "clean": "../../node_modules/.bin/rimraf es node typings",
+    "lint": "../../node_modules/.bin/tslint -c ../../tslint.json -p ./tsconfig.json",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
+    "test": "../../node_modules/.bin/jest -c jest.json",
+    "test:quick": "../../node_modules/.bin/jest -c jest.json es/*",
+    "test:watch": "../../node_modules/.bin/jest -c jest.json --watch es/*"
+  },
+  "keywords": [],
+  "author": "Jiseung Roh <jiseung.roh@gmail.com> (http://rohjs.github.io/)",
+  "license": "ISC",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^21.1.3"
+  }
+}
