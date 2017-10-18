@@ -1,6 +1,6 @@
 {
   "name": "typed-mdast-util-to-hast",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "node/lib/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^21.1.2",
+    "@types/mdurl": "^1.0.0",
     "typed-hast": "^0.1.0",
     "typed-mdast": "^0.1.1",
     "typed-unist": "^0.1.0"
