@@ -1,21 +1,20 @@
 /* Interface. */
-interface PropertyConfig {
-  [key: string]: number | null
-}
-
-interface PropertyToAttributeMapping {
-  [key: string]: string
-}
-
-interface Information {
+export interface Information {
   name: string
   propertyName: string
-  [key: string]: string | boolean | any
+  mustUseAttribute: boolean
+  mustUseProperty: boolean
+  boolean: boolean
+  overloadedBoolean: boolean
+  numeric: boolean
+  positiveNumeric: boolean
+  commaSeparated: boolean
+  spaceSeparated: boolean
 }
 
-interface GetPropertyInformation {
+export interface GetPropertyInformation {
   (property: string): Information
-  all?: {
+  all: {
     [key: string]: Information
   }
 }
@@ -31,7 +30,9 @@ const SPACE_SEPARATED = 0x80
 const COMMA_SEPARATED = 0x100
 
 /* Map of properties. Names are camel-cased properties. */
-const propertyConfig: PropertyConfig = {
+const propertyConfig: {
+  [key: string]: number
+} = {
   /* Standard Properties. */
   abbr: null,
   accept: COMMA_SEPARATED,
@@ -223,7 +224,7 @@ const propertyConfig: PropertyConfig = {
 /* Map of properties to attributes.
  * Names are lower-case properties.
  * Values are HTML attributes. */
-const propertyToAttributeMapping: PropertyToAttributeMapping = {
+const propertyToAttributeMapping: {[name: string]: string} = {
   xmlbase: 'xml:base',
   xmllang: 'xml:lang',
   classname: 'class',
@@ -233,7 +234,9 @@ const propertyToAttributeMapping: PropertyToAttributeMapping = {
 }
 
 /* Expand config. */
-const information = {} as any
+const information: {
+  [name: string]: Information
+} = {}
 let property: string
 let aName: string
 let config: number
@@ -247,7 +250,8 @@ for (property in propertyConfig) {
     name: aName,
     propertyName: property,
     mustUseAttribute: check(config, USE_ATTRIBUTE),
-    mustUseProperty: check(config, USE_PROPERTY),
+    mustUseProperty:
+     check(config, USE_PROPERTY),
     boolean: check(config, BOOLEAN_VALUE),
     overloadedBoolean: check(config, OVERLOADED_BOOLEAN_VALUE),
     numeric: check(config, NUMERIC_VALUE),
@@ -258,11 +262,11 @@ for (property in propertyConfig) {
 }
 
 /* Get a config for a property. */
-const getPropertyInformation: GetPropertyInformation = (propertyName) => {
+const getPropertyInformation = function (propertyName) {
   propertyName = propertyName.toLowerCase()
 
   return information[propertyToAttributeMapping[propertyName] || propertyName]
-}
+} as GetPropertyInformation
 
 getPropertyInformation.all = information
 
