@@ -1,6 +1,6 @@
 {
-  "name": "typed-hast-util-is-element",
-  "version": "0.1.0",
+  "name": "typed-mdast-util-to-hast",
+  "version": "0.1.2",
   "description": "",
   "main": "node/lib/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "test:watch": "../../node_modules/.bin/jest -c jest.json --watch es/*"
   },
   "keywords": [],
-  "author": "Jiseung Roh <jiseung.roh@gmail.com> (http://rohjs.github.io/)",
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
   "license": "ISC",
   "module": "es/lib/index.js",
   "types": "typings/lib/index.d.ts",
@@ -28,8 +28,15 @@
   ],
   "devDependencies": {
     "@types/jest": "^21.1.2",
+    "@types/mdurl": "^1.0.0",
     "typed-hast": "^0.1.0",
+    "typed-mdast": "^0.1.1",
     "typed-unist": "^0.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "mdurl": "^1.0.1",
+    "typed-mdast-util-definitions": "^0.1.2",
+    "typed-string-utils": "^0.2.0",
+    "typed-unist-builder": "^0.1.0"
+  }
 }
