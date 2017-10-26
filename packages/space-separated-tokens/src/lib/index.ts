@@ -3,7 +3,7 @@ const space = ' '
 const whiteSpace = /[ \t\n\r\f]+/g
 
 export function parse (value: string): string | string[] {
-  const input = (String(value || empty)).trim()
+  const input = value.trim()
 
   if (input === empty) {
     return []
