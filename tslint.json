@@ -32,6 +32,7 @@
     ],
     "no-bitwise": false,
     "only-arrow-functions": false,
-    "forin": false
+    "forin": false,
+    "unified-signatures": false
   }
 }
