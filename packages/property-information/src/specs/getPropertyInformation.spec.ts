@@ -1,4 +1,4 @@
-import getPropertyInformation from '../lib/index'
+import { getPropertyInformation } from '../lib/index'
 
 describe('getPropertyInformation(name)', () => {
   it('should work', () => {

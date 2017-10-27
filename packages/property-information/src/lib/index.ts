@@ -12,13 +12,6 @@ export interface Information {
   spaceSeparated: boolean
 }
 
-export interface GetPropertyInformation {
-  (property: string): Information
-  all: {
-    [key: string]: Information
-  }
-}
-
 /* Constants. */
 const USE_ATTRIBUTE = 0x1
 const USE_PROPERTY = 0x2
@@ -234,7 +227,7 @@ const propertyToAttributeMapping: {[name: string]: string} = {
 }
 
 /* Expand config. */
-const information: {
+export const information: {
   [name: string]: Information
 } = {}
 let property: string
@@ -262,17 +255,13 @@ for (property in propertyConfig) {
 }
 
 /* Get a config for a property. */
-const getPropertyInformation = function (propertyName) {
+export function getPropertyInformation (propertyName: string) {
   propertyName = propertyName.toLowerCase()
 
   return information[propertyToAttributeMapping[propertyName] || propertyName]
-} as GetPropertyInformation
-
-getPropertyInformation.all = information
+}
 
 /* Check a mask. */
 function check (value: number, bitmask: number): boolean {
   return (value & bitmask) === bitmask
 }
-
-export default getPropertyInformation
