@@ -27,6 +27,11 @@
     "typings/lib/*"
   ],
   "devDependencies": {
-    "@types/jest": "^21.1.4"
+    "@types/jest": "^21.1.4",
+    "typed-unist-builder": "^0.1.0"
+  },
+  "dependencies": {
+    "typed-hast": "^0.1.0",
+    "typed-unist": "^0.1.0"
   }
 }
