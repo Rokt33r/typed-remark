@@ -27,15 +27,11 @@ function preserveCamelCase (str: string) {
   return str
 }
 
-export function camelCase (str: string) {
-  if (arguments.length > 1) {
-    str = Array.from(arguments)
-      .map(x => x.trim())
-      .filter(x => x.length)
-      .join('-')
-  } else {
-    str = str.trim()
-  }
+export function camelCase (...strings: string[]) {
+  let str = strings
+    .map(x => x.trim())
+    .filter(x => x.length)
+    .join('-')
 
   if (str.length === 0) {
     return ''
