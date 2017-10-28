@@ -1,3 +1,4 @@
+export * from './camelCase'
 export * from './ccount'
 export * from './collapseWhitespace'
 export * from './collapseLines'
