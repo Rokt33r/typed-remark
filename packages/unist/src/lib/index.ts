@@ -41,6 +41,10 @@ export interface Position {
 export interface Node {
   type: string
   position?: Position
+  data?: {
+    [key: string]: any
+  }
+  [key: string]: any
 }
 
 /**
