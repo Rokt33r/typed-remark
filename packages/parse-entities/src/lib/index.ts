@@ -16,7 +16,7 @@ const fromCharCode = String.fromCharCode
 const noop = Function.prototype
 
 export type WarningHandler<C> = (this: C, reason: string, location: Position, code: number) => void
-export type ReferenceHandler<C> = (this: C, reason: string, location: Position, code: number) => void
+export type ReferenceHandler<C> = (this: C, reason: string, location: Position, source: string) => void
 export type TextHandler<C> = (this: C, value: string, location: Position) => void
 
 export interface Options<C> {
