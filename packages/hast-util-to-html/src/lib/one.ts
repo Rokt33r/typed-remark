@@ -1,10 +1,11 @@
+import { all } from './all'
 import { text } from './text'
 import { element } from './element'
 import { doctype } from './doctype'
 import { comment } from './comment'
 import { raw } from './raw'
 import { Node, Parent } from 'typed-unist'
-import { Element, TextNode, Doctype, Comment } from 'typed-hast'
+import { Root, Element, TextNode, Doctype, Comment } from 'typed-hast'
 import { ToHTMLContext } from './'
 
 /** Stringify `node`. */
@@ -12,6 +13,8 @@ export function one (ctx: ToHTMLContext, node: string | Node, index?: number, pa
   const type = node && (node as Node).type
 
   switch ((node as Node).type) {
+    case 'root':
+      return all(ctx, node as Root)
     case 'text':
       return text(ctx, node as TextNode, index, parent)
     case 'element':

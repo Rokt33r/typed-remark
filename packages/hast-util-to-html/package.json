@@ -28,6 +28,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^21.1.5",
+    "typed-hastscript": "^0.1.0",
     "typed-unist-builder": "^0.1.0"
   },
   "dependencies": {
@@ -40,7 +41,7 @@
     "typed-space-separated-tokens": "^0.1.0",
     "typed-string-utils": "^0.2.1",
     "typed-stringify-entities": "^0.1.0",
-    "typed-unist": "^0.1.0",
+    "typed-unist": "^0.2.0",
     "typed-unist-util-is": "^0.1.0"
   }
 }

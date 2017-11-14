@@ -76,6 +76,7 @@ function colgroup (node: Node, index: number, parent: Parent) {
 
   /* Previous colgroup was already omitted. */
   if (
+    prev &&
     isElement(prev, 'colgroup') &&
     closing(prev, place(parent, prev), parent)
   ) {
@@ -92,6 +93,7 @@ function tbody (node: Node, index: number, parent: Parent) {
 
   /* Previous table section was already omitted. */
   if (
+    prev &&
     isElement(prev, ['thead', 'tbody']) &&
     closing(prev, place(parent, prev), parent)
   ) {
