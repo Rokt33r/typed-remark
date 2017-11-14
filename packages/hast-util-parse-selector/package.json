@@ -1,6 +1,6 @@
 {
   "name": "typed-hast-util-parse-selector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "node/lib/index.js",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
@@ -29,7 +29,7 @@
     "@types/jest": "^21.1.5"
   },
   "dependencies": {
-    "typed-hast": "^0.1.0"
+    "typed-hast": "^0.1.1"
   },
   "description": ""
 }
