@@ -15,10 +15,14 @@ const own = {}.hasOwnProperty
 const fromCharCode = String.fromCharCode
 const noop = Function.prototype
 
+export type WarningHandler<C> = (this: C, reason: string, location: Position, code: number) => void
+export type ReferenceHandler<C> = (this: C, reason: string, location: Position, code: number) => void
+export type TextHandler<C> = (this: C, value: string, location: Position) => void
+
 export interface Options<C> {
-  warning?: (this: C, reason: string, location: Position, code: number) => void
-  reference?: (this: C, value: string, location: Position, source: string) => void
-  text?: (this: C, value: string, location: Position) => void
+  warning?: WarningHandler<C>
+  reference?: ReferenceHandler<C>
+  text?: TextHandler<C>
   warningContext?: C
   textContext?: C
   referenceContext?: C
@@ -44,14 +48,16 @@ const defaults: Options<any> = {
 }
 
 /* Reference types. */
-const NAMED = 'named'
-const HEXADECIMAL = 'hexadecimal'
-const DECIMAL = 'decimal'
+enum Types {
+  NAMED = 'named',
+  HEXADECIMAL = 'hexadecimal',
+  DECIMAL = 'decimal',
+}
 
 /* Map of bases. */
 const BASE = {
-  [HEXADECIMAL]: 16,
-  [DECIMAL]: 10,
+  [Types.HEXADECIMAL]: 16,
+  [Types.DECIMAL]: 10,
 }
 
 /* Map of types to tests. Each type of character reference
@@ -59,28 +65,30 @@ const BASE = {
  * detect whether a reference has ended (as the semicolon
  * is not strictly needed). */
 const TESTS = {
-  [NAMED]: isAlphanumerical,
-  [DECIMAL]: isDecimal,
-  [HEXADECIMAL]: isHexadecimal,
+  [Types.NAMED]: isAlphanumerical,
+  [Types.DECIMAL]: isDecimal,
+  [Types.HEXADECIMAL]: isHexadecimal,
 }
 
 /* Warning messages. */
-const NAMED_NOT_TERMINATED = 1
-const NUMERIC_NOT_TERMINATED = 2
-const NAMED_EMPTY = 3
-const NUMERIC_EMPTY = 4
-const NAMED_UNKNOWN = 5
-const NUMERIC_DISALLOWED = 6
-const NUMERIC_PROHIBITED = 7
+enum Warn {
+  NAMED_NOT_TERMINATED = 1,
+  NUMERIC_NOT_TERMINATED = 2,
+  NAMED_EMPTY = 3,
+  NUMERIC_EMPTY = 4,
+  NAMED_UNKNOWN = 5,
+  NUMERIC_DISALLOWED = 6,
+  NUMERIC_PROHIBITED = 7,
+}
 
 const MESSAGES = {
-  [NAMED_NOT_TERMINATED]: 'Named character references must be terminated by a semicolon',
-  [NUMERIC_NOT_TERMINATED]: 'Numeric character references must be terminated by a semicolon',
-  [NAMED_EMPTY]: 'Named character references cannot be empty',
-  [NUMERIC_EMPTY]: 'Numeric character references cannot be empty',
-  [NAMED_UNKNOWN]: 'Named character references must be known',
-  [NUMERIC_DISALLOWED]: 'Numeric character references cannot be disallowed',
-  [NUMERIC_PROHIBITED]: 'Numeric character references cannot be outside the permissible Unicode range',
+  [Warn.NAMED_NOT_TERMINATED]: 'Named character references must be terminated by a semicolon',
+  [Warn.NUMERIC_NOT_TERMINATED]: 'Numeric character references must be terminated by a semicolon',
+  [Warn.NAMED_EMPTY]: 'Named character references cannot be empty',
+  [Warn.NUMERIC_EMPTY]: 'Numeric character references cannot be empty',
+  [Warn.NAMED_UNKNOWN]: 'Named character references must be known',
+  [Warn.NUMERIC_DISALLOWED]: 'Numeric character references cannot be disallowed',
+  [Warn.NUMERIC_PROHIBITED]: 'Numeric character references cannot be outside the permissible Unicode range',
 }
 
 /* Wrap to ensure clean parameters are given to `parse`. */
@@ -132,7 +140,7 @@ function parse<C> (value: string, settings: Settings<C>) {
   let entity
   let begin
   let start
-  let type
+  let type: Types
   let test
   let prev: Point
   let next: Point
@@ -203,7 +211,7 @@ function parse<C> (value: string, settings: Settings<C>) {
 
       /* Numerical entity. */
       if (following !== '#') {
-        type = NAMED
+        type = Types.NAMED
       } else {
         end = ++begin
 
@@ -213,11 +221,11 @@ function parse<C> (value: string, settings: Settings<C>) {
 
         if (following === 'x' || following === 'X') {
           /* ASCII hex digits. */
-          type = HEXADECIMAL
+          type = Types.HEXADECIMAL
           end = ++begin
         } else {
           /* ASCII digits. */
-          type = DECIMAL
+          type = Types.DECIMAL
         }
       }
 
@@ -241,7 +249,7 @@ function parse<C> (value: string, settings: Settings<C>) {
          * last viable named reference.  This
          * ensures we do not need to walk backwards
          * later. */
-        if (type === NAMED && own.call(characterEntitiesLegacy, characters)) {
+        if (type === Types.NAMED && own.call(characterEntitiesLegacy, characters)) {
           entityCharacters = characters
           entity = (characterEntitiesLegacy as {[key: string]: string})[characters]
         }
@@ -252,7 +260,7 @@ function parse<C> (value: string, settings: Settings<C>) {
       if (terminated) {
         end++
 
-        if (type === NAMED && own.call(characterEntities, characters)) {
+        if (type === Types.NAMED && own.call(characterEntities, characters)) {
           entityCharacters = characters
           entity = (characterEntities as {[key: string]: string})[characters]
         }
@@ -266,14 +274,14 @@ function parse<C> (value: string, settings: Settings<C>) {
         /* An empty (possible) entity is valid, unless
          * its numeric (thus an ampersand followed by
          * an octothorp). */
-        if (type !== NAMED) {
-          warning(NUMERIC_EMPTY, diff)
+        if (type !== Types.NAMED) {
+          warning(Warn.NUMERIC_EMPTY, diff)
         }
-      } else if (type === NAMED) {
+      } else if (type === Types.NAMED) {
         /* An ampersand followed by anything
          * unknown, and not terminated, is invalid. */
         if (terminated && !entity) {
-          warning(NAMED_UNKNOWN, 1)
+          warning(Warn.NAMED_UNKNOWN, 1)
         } else {
           /* If theres something after an entity
            * name which is not known, cap the
@@ -287,7 +295,7 @@ function parse<C> (value: string, settings: Settings<C>) {
           /* If the reference is not terminated,
            * warn. */
           if (!terminated) {
-            reason = entityCharacters ? NAMED_NOT_TERMINATED : NAMED_EMPTY
+            reason = entityCharacters ? Warn.NAMED_NOT_TERMINATED : Warn.NAMED_EMPTY
 
             if (!settings.attribute) {
               warning(reason, diff)
@@ -311,7 +319,7 @@ function parse<C> (value: string, settings: Settings<C>) {
         if (!terminated) {
           /* All non-terminated numeric entities are
            * not rendered, and trigger a warning. */
-          warning(NUMERIC_NOT_TERMINATED, diff)
+          warning(Warn.NUMERIC_NOT_TERMINATED, diff)
         }
 
         /* When terminated and number, parse as
@@ -322,13 +330,13 @@ function parse<C> (value: string, settings: Settings<C>) {
          * is prohibited, and replace with
          * replacement character. */
         if (prohibited(reference)) {
-          warning(NUMERIC_PROHIBITED, diff)
+          warning(Warn.NUMERIC_PROHIBITED, diff)
           reference = '\uFFFD'
         } else if (reference in characterReferenceInvalid) {
           /* Trigger a warning when the parsed number
            * is disallowed, and replace by an
            * alternative. */
-          warning(NUMERIC_DISALLOWED, diff)
+          warning(Warn.NUMERIC_DISALLOWED, diff)
           reference = (characterReferenceInvalid as {[key: string]: string})[reference]
         } else {
           /* Parse the number. */
@@ -337,7 +345,7 @@ function parse<C> (value: string, settings: Settings<C>) {
           /* Trigger a warning when the parsed
            * number should not be used. */
           if (disallowed(reference)) {
-            warning(NUMERIC_DISALLOWED, diff)
+            warning(Warn.NUMERIC_DISALLOWED, diff)
           }
 
           /* Stringify the number. */
@@ -399,7 +407,7 @@ function parse<C> (value: string, settings: Settings<C>) {
   }
 
   /* “Throw” a parse-error: a warning. */
-  function parseError (code: number, offset: number) {
+  function parseError (code: Warn, offset: number) {
     const position = now()
 
     position.column += offset
