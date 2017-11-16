@@ -120,9 +120,9 @@ function factory (tree: Node, options: ToHastOptions) {
 }
 
 /* Transform `tree`, which is an MDAST node, to a HAST node. */
-export function toHAST (tree: Node, options?: ToHastOptions) {
+export function toHAST (tree: Node, options?: ToHastOptions): Node {
   const h = factory(tree, options)
-  const node = one(h, tree)
+  const node = one(h, tree) as Node
   const footnotes = generateFootnotes(h)
 
   if (node && (node as Parent).children && footnotes) {
