@@ -12,7 +12,9 @@ const MAX_HEADING_INDENT = 3
 
 /* Map of characters which can be used to mark setext
  * headers, mapping to their corresponding depth. */
-const SETEXT_MARKERS = {
+const SETEXT_MARKERS: {
+  [key: string]: number
+} = {
   [C_EQUALS]: 1,
   [C_DASH]: 2,
 }

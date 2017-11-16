@@ -19,14 +19,18 @@ const C_SINGLE_QUOTE = '\''
 
 /* Map of characters, which can be used to mark link
  * and image titles. */
-const LINK_MARKERS = {
+const LINK_MARKERS: {
+  [key: string]: string
+} = {
   [C_DOUBLE_QUOTE]: C_DOUBLE_QUOTE,
   [C_SINGLE_QUOTE]: C_SINGLE_QUOTE,
 }
 
 /* Map of characters, which can be used to mark link
  * and image titles in commonmark-mode. */
-const COMMONMARK_LINK_MARKERS = {
+const COMMONMARK_LINK_MARKERS: {
+  [key: string]: string
+} = {
   [C_DOUBLE_QUOTE]: C_DOUBLE_QUOTE,
   [C_SINGLE_QUOTE]: C_SINGLE_QUOTE,
   [C_PAREN_OPEN]: C_PAREN_CLOSE,

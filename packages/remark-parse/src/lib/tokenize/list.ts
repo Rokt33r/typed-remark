@@ -26,7 +26,9 @@ const EXPRESSION_INITIAL_INDENT = /^( {1,4}|\t)?/gm
 
 /* Map of characters which can be used to mark
  * list-items. */
-const LIST_UNORDERED_MARKERS = {
+const LIST_UNORDERED_MARKERS: {
+  [key: string]: boolean
+} = {
   [C_ASTERISK]: true,
   [C_PLUS]: true,
   [C_DASH]: true,
@@ -34,13 +36,17 @@ const LIST_UNORDERED_MARKERS = {
 
 /* Map of characters which can be used to mark
  * list-items after a digit. */
-const LIST_ORDERED_MARKERS = {
+const LIST_ORDERED_MARKERS: {
+  [key: string]: boolean
+} = {
   [C_DOT]: true,
 }
 
 /* Map of characters which can be used to mark
  * list-items after a digit. */
-const LIST_ORDERED_COMMONMARK_MARKERS = {
+const LIST_ORDERED_COMMONMARK_MARKERS: {
+  [key: string]: boolean
+} = {
   [C_DOT]: true,
   [C_PAREN_CLOSE]: true,
 }
