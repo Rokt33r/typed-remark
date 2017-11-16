@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "inlineSourceMap": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": false
   }
 }

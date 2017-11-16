@@ -24,28 +24,8 @@ export interface Properties {
 
 const hasOwnProperty = {}.hasOwnProperty
 
-/* Schema. */
-const NODES: NODES = {
-  'root': {children: all},
-  'element': {
-    tagName: handleTagName,
-    properties: handleProperties,
-    children: all,
-  },
-  'text': {value: handleValue},
-  '*': {
-    data: allow,
-    position: allow,
-  },
-}
-interface NODES {
-  [key: string]: {
-    [key: string]: (schema: SanitizeSchema, property: Properties | Node[] | string, node: Node, stack: string[]) => Properties | Node[] | string | false
-  }
-}
-
 /** Sanitize `node`, according to `schema`. */
-export function sanitizeHAST (node: Node, schema: Partial<SanitizeSchema>) {
+export function sanitizeHAST (node: Node, schema?: Partial<SanitizeSchema>): Node {
   const ctx: Root = {type: 'root', children: []} as Root
 
   if (!node || typeof node !== 'object' || !node.type) {
@@ -68,7 +48,7 @@ export function sanitizeHAST (node: Node, schema: Partial<SanitizeSchema>) {
     return ctx
   }
 
-  return replace
+  return replace as Node
 }
 
 /* Sanitize `node`. */
@@ -79,13 +59,7 @@ function one (schema: SanitizeSchema, node: Node, stack: string[]): Node | Node[
 
   switch (type) {
     case 'root':
-      const replacedChildren = all(schema, (node as Root).children, node, stack)
-      if (replacedChildren === false) {
-        (replacement as Root).children = (node as Root).children
-        replace = false
-      } else if (replacedChildren != null) {
-        (replacement as Root).children = replacedChildren
-      }
+      (replacement as Root).children = all(schema, (node as Root).children, node, stack)
       break
     case 'element':
       const replacedTagName = handleTagName(schema, (node as Element).tagName, node, stack)
@@ -97,18 +71,12 @@ function one (schema: SanitizeSchema, node: Node, stack: string[]): Node | Node[
       }
       const replacedProperties = handleProperties(schema, (node as Element).properties, node as Element, stack)
       if (replacedTagName === false) {
-        (replacedProperties as Element).properties = (node as Element).properties
+        (replacement as Element).properties = (node as Element).properties
         replace = false
       } else if (replacedProperties != null) {
-        (replacedProperties as Element).properties = replacedProperties
+        (replacement as Element).properties = replacedProperties
       }
-      const replacedChildren2 = all(schema, (node as Element).children, node, stack)
-      if (replacedChildren2 === false) {
-        (replacement as Element).children = (node as Element).children
-        replace = false
-      } else if (replacedChildren2 != null) {
-        (replacement as Element).children = replacedChildren2
-      }
+      (replacement as Element).children = all(schema, (node as Element).children, node, stack)
       break
     case 'text':
       (replacement as Text).value = handleValue(schema, (node as Text).value)
@@ -116,6 +84,9 @@ function one (schema: SanitizeSchema, node: Node, stack: string[]): Node | Node[
     default:
       replace = false
   }
+
+  if (node.data) replacement.data = node.data
+  if (node.position) replacement.position = node.position
 
   if (!replace) {
     if (
@@ -133,7 +104,7 @@ function one (schema: SanitizeSchema, node: Node, stack: string[]): Node | Node[
 }
 
 /* Sanitize `children`. */
-function all (schema: SanitizeSchema, children: Node[], node: Node, stack: string[]): false | Node[] {
+function all (schema: SanitizeSchema, children: Node[], node: Node, stack: string[]): Node[] {
   const nodes = children || []
   const length = nodes.length || 0
   const results: Node[] = []
@@ -167,9 +138,9 @@ function handleProperties (schema: SanitizeSchema, properties: Properties, node:
   let prop
   let value
 
-  allowed = hasOwnProperty.call(attrs, name) ? attrs.name : []
-  allowed = [].concat(allowed, attrs['*'])
+  allowed = hasOwnProperty.call(attrs, name) ? attrs[name as string] : []
 
+  allowed = [].concat(allowed, attrs['*'])
   for (prop in props) {
     value = props[prop]
 
@@ -325,11 +296,6 @@ function handleTagName (schema: SanitizeSchema, tagName: string, node: Node, sta
 /* Sanitize `value`. */
 function handleValue (schema: SanitizeSchema, value: any): string {
   return typeof value === 'string' ? value : ''
-}
-
-/* Allow `value`. */
-function allow (schema: SanitizeSchema, value: string) {
-  return value
 }
 
 /* Check if `prop` is a data property. */

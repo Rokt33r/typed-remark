@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "typed-hast": "^0.1.0",
-    "typed-unist": "^0.1.0"
+    "typed-hast-util-to-html": "^0.1.0",
+    "typed-hastscript": "^0.1.0",
+    "typed-unist": "^0.2.0"
   }
 }

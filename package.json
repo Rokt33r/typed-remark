@@ -7,7 +7,7 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna exec npm run build",
     "cp": "ts-node scripts/cp",
     "postinstall": "lerna exec npm i && npm run build",
     "lint": "lerna run lint",
