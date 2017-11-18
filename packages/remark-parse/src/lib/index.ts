@@ -1,5 +1,13 @@
 import { Processor, Attacher } from 'typed-unified'
-import { RemarkParserOptions, parserFactory } from './RemarkParser'
+import {
+  RemarkParserOptions,
+  parserFactory,
+} from './RemarkParser'
+export {
+  RemarkParser,
+  RemarkParserConstructor,
+  RemarkParserOptions,
+} from './RemarkParser'
 export {
   TokenizeMethod,
   Eat,
