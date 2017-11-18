@@ -11,7 +11,7 @@ export function toString (node: Node) {
 
 /* Get the value of `node`.  Checks, `value`,
  * `alt`, and `title`, in that order. */
-function valueOf (node: Node) {
+function valueOf (node: Node): string {
   if (!node) {
     return ''
   }
