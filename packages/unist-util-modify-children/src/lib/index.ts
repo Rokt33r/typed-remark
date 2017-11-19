@@ -1,7 +1,7 @@
 import { Node, Parent } from 'typed-unist'
 import { iterate } from 'typed-array-iterate'
 
-type Modifier <C extends Parent> = (child: Node, index: number, parent: C) => number | void
+export type Modifier <C extends Parent> = (child: Node, index: number, parent: C) => number | void
 
 /**
  * Turn `callback` into a child-modifier accepting a parent.
