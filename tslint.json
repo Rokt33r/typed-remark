@@ -33,6 +33,8 @@
     "no-bitwise": false,
     "only-arrow-functions": false,
     "forin": false,
-    "unified-signatures": false
+    "unified-signatures": false,
+    "no-require-imports": false,
+    "no-var-requires": false
   }
 }
