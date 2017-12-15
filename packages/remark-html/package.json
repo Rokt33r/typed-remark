@@ -1,19 +1,8 @@
 {
-  "name": "typed-string-utils",
-  "version": "0.4.0",
+  "name": "typed-remark-html",
+  "version": "0.1.0",
   "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
-  "files": [
-    "src/lib/*",
-    "es/lib/*",
-    "node/lib/*",
-    "typings/lib/*"
-  ],
   "main": "node/lib/index.js",
-  "module": "es/lib/index.js",
-  "types": "typings/lib/index.d.ts",
   "scripts": {
     "build": "npm run clean && npm run build:es && npm run build:node",
     "build:es": "../../node_modules/.bin/tsc -p . -d --declarationDir typings --outDir es",
@@ -26,7 +15,29 @@
     "test:quick": "../../node_modules/.bin/jest -c jest.json es/*",
     "test:watch": "../../node_modules/.bin/jest -c jest.json --watch es/*"
   },
+  "keywords": [],
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io/)",
+  "license": "ISC",
+  "module": "es/lib/index.js",
+  "types": "typings/lib/index.d.ts",
+  "files": [
+    "src/lib/*",
+    "es/lib/*",
+    "node/lib/*",
+    "typings/lib/*"
+  ],
   "devDependencies": {
-    "@types/jest": "^21.1.2"
+    "@types/jest": "^21.1.6",
+    "commonmark.json": "^0.27.0",
+    "typed-remark-parse": "^0.1.3",
+    "typed-unified": "^0.1.5"
+  },
+  "dependencies": {
+    "typed-hast": "^0.1.1",
+    "typed-hast-util-sanitize": "^0.1.0",
+    "typed-hast-util-to-html": "^0.1.0",
+    "typed-mdast-util-to-hast": "^0.1.3",
+    "typed-unist": "^0.2.0",
+    "typed-vfile": "^0.2.2"
   }
 }
